@@ -115,6 +115,33 @@
     color: var(--muted);
   }
 
+  .learning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .learning-step {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(13, 17, 26, 0.5);
+    border-radius: 10px;
+    padding: 11px;
+  }
+
+  .learning-step h3 {
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 6px;
+    color: #dbe2f3;
+  }
+
+  .learning-step p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
   .grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -322,6 +349,12 @@
     transform: translateY(-1px);
   }
 
+  .chip.compare {
+    background: var(--yellow-dim);
+    color: var(--yellow);
+    border-color: rgba(245, 197, 66, 0.65);
+  }
+
   .chip.dup {
     background: var(--red-dim);
     color: var(--red);
@@ -439,6 +472,241 @@
     gap: 14px;
   }
 
+  .trace-shell {
+    margin-bottom: 12px;
+  }
+
+  .trace-setup {
+    margin-bottom: 10px;
+  }
+
+  .trace-datasets {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 2px 0 8px;
+  }
+
+  .dataset-btn {
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 11px;
+  }
+
+  .dataset-btn.active {
+    background: var(--violet-dim);
+    color: var(--violet);
+    border-color: rgba(167, 139, 250, 0.55);
+  }
+
+  .trace-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .trace-tab.active {
+    background: var(--cyan-dim);
+    color: var(--cyan);
+    border-color: rgba(34, 211, 238, 0.55);
+  }
+
+  .trace-grid {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    gap: 14px;
+  }
+
+  .trace-panel {
+    padding: 14px;
+  }
+
+  .trace-code {
+    display: grid;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .trace-line {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 9px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    background: rgba(10, 13, 20, 0.75);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #dde4f4;
+  }
+
+  .trace-line.active {
+    border-color: rgba(34, 211, 238, 0.55);
+    background: rgba(34, 211, 238, 0.12);
+    box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.18) inset;
+  }
+
+  .trace-ln {
+    text-align: right;
+    color: var(--muted);
+  }
+
+  .trace-txt {
+    white-space: pre;
+  }
+
+  .trace-state {
+    display: grid;
+    gap: 7px;
+    margin: 8px 0 10px;
+  }
+
+  .trace-kv {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #d9e0f2;
+    padding-bottom: 7px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  }
+
+  .trace-kv:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .trace-key {
+    color: var(--muted);
+  }
+
+  .trace-val {
+    text-align: right;
+  }
+
+  .trace-set {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .trace-pill {
+    border-radius: 999px;
+    padding: 3px 8px;
+    border: 1px solid rgba(167, 139, 250, 0.55);
+    background: var(--violet-dim);
+    color: var(--violet);
+    font-size: 11px;
+  }
+
+  .trace-pill.empty {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--muted);
+  }
+
+  .trace-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .metric-chip {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(13, 17, 26, 0.5);
+    border-radius: 9px;
+    padding: 8px;
+  }
+
+  .metric-chip .label {
+    display: block;
+    font-size: 10px;
+    color: var(--muted);
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 3px;
+  }
+
+  .metric-chip .value {
+    font-size: 13px;
+    color: #dbe2f3;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .trace-coach {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-left: 3px solid var(--cyan);
+    background: rgba(34, 211, 238, 0.08);
+    border-radius: 8px;
+    padding: 9px 10px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: #d3e8f4;
+    margin-bottom: 10px;
+  }
+
+  .quiz-shell {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(13, 17, 26, 0.5);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .quiz-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .quiz-item {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    background: rgba(13, 17, 26, 0.45);
+    padding: 10px;
+  }
+
+  .quiz-q {
+    font-size: 13px;
+    color: #dbe2f3;
+    margin-bottom: 7px;
+    line-height: 1.5;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .quiz-option {
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+
+  .quiz-option.correct {
+    border-color: rgba(74, 222, 128, 0.65);
+    background: var(--green-dim);
+    color: var(--green);
+  }
+
+  .quiz-option.wrong {
+    border-color: rgba(248, 113, 113, 0.65);
+    background: var(--red-dim);
+    color: var(--red);
+  }
+
+  .quiz-feedback {
+    margin-top: 7px;
+    font-size: 12px;
+    color: var(--muted);
+    min-height: 18px;
+  }
+
   .notes {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -470,7 +738,12 @@
     .problem,
     .split,
     .sim,
-    .code-grid {
+    .code-grid,
+    .trace-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .trace-metrics {
       grid-template-columns: 1fr;
     }
 
@@ -513,6 +786,29 @@
     </header>
 
     <main class="grid">
+      <section class="card">
+        <h2 class="section-title">Learning Route (Max Retention)</h2>
+        <p class="sub">Use this order to maximize understanding and memory: intuition first, execution second, recall third.</p>
+        <div class="learning-grid">
+          <article class="learning-step">
+            <h3>1) Understand The Goal</h3>
+            <p>Focus on what must be returned, not how. The question only asks: duplicate exists or not.</p>
+          </article>
+          <article class="learning-step">
+            <h3>2) Run Set Simulation</h3>
+            <p>Step through the input and repeat the invariant: <code>seen</code> stores all unique values processed so far.</p>
+          </article>
+          <article class="learning-step">
+            <h3>3) Compare To Brute Force</h3>
+            <p>Switch to brute-force trace and observe how fast comparisons explode versus hash lookups.</p>
+          </article>
+          <article class="learning-step">
+            <h3>4) Verify With Quiz</h3>
+            <p>Answer short checks without peeking. If wrong, replay the trace for the same dataset immediately.</p>
+          </article>
+        </div>
+      </section>
+
       <section class="card">
         <h2 class="section-title">Problem Snapshot</h2>
         <p class="sub">Given an integer array <code>nums</code>, return <code>true</code> if any value appears at least twice, and <code>false</code> if every element is distinct.</p>
@@ -631,29 +927,78 @@
 
       <section class="card">
         <h2 class="section-title">Reference Implementations (Python)</h2>
-        <div class="code-grid">
-          <div>
-            <p class="sub" style="margin-bottom:8px;">Baseline (nested loops)</p>
-<pre><code>def contains_duplicate_bruteforce(nums):
-    n = len(nums)
-    for i in range(n):
-        for j in range(i + 1, n):
-            if nums[i] == nums[j]:
-                return True
-    return False</code></pre>
+        <div class="trace-shell">
+          <div class="panel trace-setup">
+            <div class="k">PRACTICE DATASET</div>
+            <div class="trace-datasets">
+              <button class="dataset-btn active" type="button" data-dataset="case1">Case 1 · [1,2,3,1]</button>
+              <button class="dataset-btn" type="button" data-dataset="case2">Case 2 · [1,2,3,4]</button>
+              <button class="dataset-btn" type="button" data-dataset="case3">Case 3 · [1,1,1,3,3,4,3,2,4,2]</button>
+            </div>
+            <p class="muted" style="margin-top:0;">Change the dataset and replay both algorithms. This builds transfer, not just memorization.</p>
           </div>
-          <div>
-            <p class="sub" style="margin-bottom:8px;">Optimal (set)</p>
-<pre><code>def contains_duplicate(nums):
-    seen = set()
-    for value in nums:
-        if value in seen:
-            return True
-        seen.add(value)
-    return False
 
-# Equivalent one-liner:
-# return len(set(nums)) != len(nums)</code></pre>
+          <div class="trace-tabs">
+            <button id="traceModeSet" class="trace-tab active" type="button">Set Trace (O(n))</button>
+            <button id="traceModeBrute" class="trace-tab" type="button">Brute Force Trace (O(n^2))</button>
+          </div>
+          <p class="sub" style="margin-bottom:10px;">Run both implementations line-by-line on <code>[1, 2, 3, 1]</code> and follow how variables change at each executed line.</p>
+
+          <div class="trace-grid">
+            <div class="panel trace-panel">
+              <div class="k">ACTIVE CODE</div>
+              <div class="trace-code" id="traceCode"></div>
+            </div>
+
+            <div class="panel trace-panel">
+              <div class="k">RUNTIME STATE</div>
+              <div class="input-row" id="traceInputRow"></div>
+              <div class="trace-metrics" id="traceMetrics"></div>
+              <div class="trace-state" id="traceState"></div>
+              <div class="trace-coach" id="traceCoach">Coach starts after your first step.</div>
+              <div class="status" id="traceStatus">Press <strong>Next</strong> to execute the selected algorithm line-by-line.</div>
+              <div class="actions">
+                <button id="tracePrevBtn" type="button">Prev</button>
+                <button id="traceNextBtn" type="button">Next</button>
+                <button id="tracePlayBtn" type="button">Auto Play</button>
+                <button id="traceResetBtn" type="button">Reset</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-shell">
+          <div class="k">QUICK MASTERY CHECK</div>
+          <div class="quiz-list">
+            <article class="quiz-item" data-q="q1" data-answer="b">
+              <p class="quiz-q">Q1: What is the average time complexity of the set approach for this problem?</p>
+              <div class="quiz-options">
+                <button type="button" class="quiz-option" data-choice="a">O(n^2)</button>
+                <button type="button" class="quiz-option" data-choice="b">O(n)</button>
+                <button type="button" class="quiz-option" data-choice="c">O(log n)</button>
+              </div>
+              <div class="quiz-feedback" id="quiz-q1-feedback"></div>
+            </article>
+
+            <article class="quiz-item" data-q="q2" data-answer="a">
+              <p class="quiz-q">Q2: Why does a set help detect duplicates quickly?</p>
+              <div class="quiz-options">
+                <button type="button" class="quiz-option" data-choice="a">Fast membership checks + unique storage</button>
+                <button type="button" class="quiz-option" data-choice="b">Because sets are always sorted</button>
+                <button type="button" class="quiz-option" data-choice="c">Because they store duplicate counts by default</button>
+              </div>
+              <div class="quiz-feedback" id="quiz-q2-feedback"></div>
+            </article>
+
+            <article class="quiz-item" data-q="q3" data-answer="c">
+              <p class="quiz-q">Q3: For input <code>[1,2,3,4]</code>, what does the function return?</p>
+              <div class="quiz-options">
+                <button type="button" class="quiz-option" data-choice="a">Error</button>
+                <button type="button" class="quiz-option" data-choice="b">True</button>
+                <button type="button" class="quiz-option" data-choice="c">False</button>
+              </div>
+              <div class="quiz-feedback" id="quiz-q3-feedback"></div>
+            </article>
           </div>
         </div>
 
@@ -828,6 +1173,592 @@
 
   setInterval(animateLoopBoard, 700);
   renderStep();
+
+  const traceCodeEl = document.getElementById('traceCode');
+  const traceInputRowEl = document.getElementById('traceInputRow');
+  const traceStateEl = document.getElementById('traceState');
+  const traceStatusEl = document.getElementById('traceStatus');
+  const traceMetricsEl = document.getElementById('traceMetrics');
+  const traceCoachEl = document.getElementById('traceCoach');
+  const traceModeSetBtn = document.getElementById('traceModeSet');
+  const traceModeBruteBtn = document.getElementById('traceModeBrute');
+  const tracePrevBtn = document.getElementById('tracePrevBtn');
+  const traceNextBtn = document.getElementById('traceNextBtn');
+  const tracePlayBtn = document.getElementById('tracePlayBtn');
+  const traceResetBtn = document.getElementById('traceResetBtn');
+  const datasetBtns = Array.from(document.querySelectorAll('.dataset-btn'));
+  const quizItems = Array.from(document.querySelectorAll('.quiz-item'));
+
+  const datasetLibrary = {
+    case1: [1, 2, 3, 1],
+    case2: [1, 2, 3, 4],
+    case3: [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
+  };
+
+  let traceInput = [...datasetLibrary.case1];
+
+  function buildSetTrace(nums) {
+    const trace = [];
+    const seen = [];
+    const firstIndex = new Map();
+    let lookups = 0;
+
+    trace.push({
+      line: 1,
+      seen: [...seen],
+      lookups,
+      msg: 'Function call starts with nums.'
+    });
+
+    trace.push({
+      line: 2,
+      seen: [...seen],
+      lookups,
+      msg: 'Initialize an empty set: seen = set().'
+    });
+
+    for (let idx = 0; idx < nums.length; idx += 1) {
+      const value = nums[idx];
+      trace.push({
+        line: 3,
+        idx,
+        value,
+        seen: [...seen],
+        lookups,
+        activeIdx: idx,
+        msg: `Loop step: idx = ${idx}, value = ${value}.`
+      });
+
+      lookups += 1;
+      const firstIdx = firstIndex.has(value) ? firstIndex.get(value) : null;
+      const inSeen = firstIdx !== null;
+      trace.push({
+        line: 4,
+        idx,
+        value,
+        inSeen,
+        seen: [...seen],
+        lookups,
+        activeIdx: idx,
+        compareIdx: firstIdx,
+        msg: inSeen
+          ? `${value} is already in seen.`
+          : `${value} is not in seen.`
+      });
+
+      if (inSeen) {
+        trace.push({
+          line: 5,
+          idx,
+          value,
+          inSeen: true,
+          seen: [...seen],
+          lookups,
+          activeIdx: idx,
+          compareIdx: firstIdx,
+          dupIndices: [firstIdx, idx],
+          returnValue: true,
+          done: true,
+          msg: 'Duplicate found -> return True.'
+        });
+        return trace;
+      }
+
+      seen.push(value);
+      firstIndex.set(value, idx);
+      trace.push({
+        line: 6,
+        idx,
+        value,
+        inSeen: false,
+        seen: [...seen],
+        lookups,
+        activeIdx: idx,
+        msg: `Add ${value} to seen.`
+      });
+    }
+
+    trace.push({
+      line: 7,
+      seen: [...seen],
+      lookups,
+      returnValue: false,
+      done: true,
+      msg: 'Reached end of array with no duplicates -> return False.'
+    });
+
+    return trace;
+  }
+
+  function buildBruteforceTrace(nums) {
+    const trace = [];
+    const n = nums.length;
+    let comparisons = 0;
+
+    trace.push({
+      line: 1,
+      comparisons,
+      msg: 'Function call starts with nums.'
+    });
+
+    trace.push({
+      line: 2,
+      comparisons,
+      msg: `Set n = len(nums) = ${n}.`
+    });
+
+    for (let i = 0; i < n; i += 1) {
+      trace.push({
+        line: 3,
+        i,
+        comparisons,
+        activeIdx: i,
+        msg: `Outer loop selects i = ${i} (value ${nums[i]}).`
+      });
+
+      for (let j = i + 1; j < n; j += 1) {
+        trace.push({
+          line: 4,
+          i,
+          j,
+          comparisons,
+          activeIdx: i,
+          compareIdx: j,
+          msg: `Inner loop checks j = ${j} (value ${nums[j]}).`
+        });
+
+        comparisons += 1;
+        const equal = nums[i] === nums[j];
+        trace.push({
+          line: 5,
+          i,
+          j,
+          leftVal: nums[i],
+          rightVal: nums[j],
+          comparisons,
+          equal,
+          activeIdx: i,
+          compareIdx: j,
+          msg: `Compare nums[${i}] and nums[${j}] -> ${equal ? 'equal' : 'not equal'}.`
+        });
+
+        if (equal) {
+          trace.push({
+            line: 6,
+            i,
+            j,
+            leftVal: nums[i],
+            rightVal: nums[j],
+            comparisons,
+            equal: true,
+            activeIdx: i,
+            compareIdx: j,
+            dupIndices: [i, j],
+            returnValue: true,
+            done: true,
+            msg: 'Duplicate found -> return True.'
+          });
+          return trace;
+        }
+      }
+    }
+
+    trace.push({
+      line: 7,
+      comparisons,
+      returnValue: false,
+      done: true,
+      msg: 'No equal pair found -> return False.'
+    });
+
+    return trace;
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+  }
+
+  function asDisplay(value) {
+    return value === null || value === undefined ? '-' : String(value);
+  }
+
+  function toPyBool(value) {
+    if (value === true) return 'True';
+    if (value === false) return 'False';
+    return '-';
+  }
+
+  function formatArray(arr) {
+    return `[${arr.join(', ')}]`;
+  }
+
+  function renderTracePills(values) {
+    if (!values.length) {
+      return '<span class="trace-pill empty">empty</span>';
+    }
+    return values
+      .map(v => `<span class="trace-pill">${escapeHtml(v)}</span>`)
+      .join('');
+  }
+
+  const traceProgramDefs = {
+    set: {
+      lines: [
+        'def contains_duplicate(nums):',
+        '    seen = set()',
+        '    for idx, value in enumerate(nums):',
+        '        if value in seen:',
+        '            return True',
+        '        seen.add(value)',
+        '    return False'
+      ],
+      builder: buildSetTrace
+    },
+    brute: {
+      lines: [
+        'def contains_duplicate_bruteforce(nums):',
+        '    n = len(nums)',
+        '    for i in range(n):',
+        '        for j in range(i + 1, n):',
+        '            if nums[i] == nums[j]:',
+        '                return True',
+        '    return False'
+      ],
+      builder: buildBruteforceTrace
+    }
+  };
+
+  let tracePrograms = {};
+  let traceMode = 'set';
+  let traceStepIndex = -1;
+  let traceTimer = null;
+
+  function rebuildTracePrograms() {
+    tracePrograms = {
+      set: {
+        lines: traceProgramDefs.set.lines,
+        steps: traceProgramDefs.set.builder(traceInput)
+      },
+      brute: {
+        lines: traceProgramDefs.brute.lines,
+        steps: traceProgramDefs.brute.builder(traceInput)
+      }
+    };
+  }
+
+  function maxOperations(mode, n) {
+    if (mode === 'set') return n;
+    return (n * (n - 1)) / 2;
+  }
+
+  function getCoachMessage(step) {
+    if (!step || step.line === undefined) {
+      return 'Coach: before each click, predict the next line and variable change.';
+    }
+
+    if (traceMode === 'set') {
+      if (step.line === 2) {
+        return 'Invariant setup: before processing, seen is empty.';
+      }
+      if (step.line === 3) {
+        return 'Think ahead: after this iteration, seen should contain unique values from index 0..idx.';
+      }
+      if (step.line === 4) {
+        return step.inSeen
+          ? 'Decision point: membership is true, so algorithm can stop early.'
+          : 'Decision point: membership is false, so we must add this value.';
+      }
+      if (step.line === 6) {
+        return 'Invariant update: seen now includes this value exactly once.';
+      }
+      if (step.line === 5) {
+        return 'Early exit optimization: first duplicate is enough to answer the problem.';
+      }
+      if (step.line === 7) {
+        return 'No duplicate found after full scan. This is the worst case for set approach.';
+      }
+      return 'Track membership checks: each value triggers one set lookup.';
+    }
+
+    if (step.line === 3) {
+      return 'Outer loop picks a fixed left element. Inner loop will compare against all following elements.';
+    }
+    if (step.line === 4) {
+      return 'Inner loop grows quickly. Count how many pairs are tested.';
+    }
+    if (step.line === 5) {
+      return step.equal
+        ? 'Comparison is true. The algorithm can return immediately.'
+        : 'Comparison is false. Keep scanning for another matching pair.';
+    }
+    if (step.line === 6) {
+      return 'Early exit helps average runtime, but worst case remains O(n^2).';
+    }
+    if (step.line === 7) {
+      return 'All pairs checked with no match. This is the expensive path.';
+    }
+    return 'Brute force checks pair-by-pair, which scales poorly for large n.';
+  }
+
+  function renderTraceInput(activeIdx, compareIdx, dupIndices) {
+    traceInputRowEl.innerHTML = '';
+    traceInput.forEach((num, idx) => {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      if (idx === activeIdx) chip.classList.add('active');
+      if (idx === compareIdx) chip.classList.add('compare');
+      if (dupIndices.includes(idx)) chip.classList.add('dup');
+      chip.textContent = num;
+      traceInputRowEl.appendChild(chip);
+    });
+  }
+
+  function renderTraceCode() {
+    const lines = tracePrograms[traceMode].lines;
+    traceCodeEl.innerHTML = lines
+      .map((line, idx) =>
+        `<div class="trace-line" data-trace-line="${idx + 1}">
+          <span class="trace-ln">${idx + 1}</span>
+          <span class="trace-txt">${escapeHtml(line)}</span>
+        </div>`)
+      .join('');
+  }
+
+  function highlightTraceLine(lineNumber) {
+    traceCodeEl.querySelectorAll('.trace-line').forEach(line => {
+      line.classList.remove('active');
+    });
+
+    if (lineNumber === null) return;
+    const activeLine = traceCodeEl.querySelector(`[data-trace-line="${lineNumber}"]`);
+    if (activeLine) activeLine.classList.add('active');
+  }
+
+  function renderTraceState(step) {
+    if (traceMode === 'set') {
+      const seenHtml = renderTracePills(step.seen || []);
+      traceStateEl.innerHTML = `
+        <div class="trace-kv"><span class="trace-key">index</span><span class="trace-val">${asDisplay(step.idx)}</span></div>
+        <div class="trace-kv"><span class="trace-key">value</span><span class="trace-val">${asDisplay(step.value)}</span></div>
+        <div class="trace-kv"><span class="trace-key">in seen?</span><span class="trace-val">${asDisplay(step.inSeen === undefined ? '-' : step.inSeen ? 'Yes' : 'No')}</span></div>
+        <div class="trace-kv"><span class="trace-key">set lookups</span><span class="trace-val">${asDisplay(step.lookups)}</span></div>
+        <div class="trace-kv"><span class="trace-key">seen set</span><span class="trace-set">${seenHtml}</span></div>
+        <div class="trace-kv"><span class="trace-key">return</span><span class="trace-val">${toPyBool(step.returnValue)}</span></div>
+      `;
+      return;
+    }
+
+    const leftValue = step.leftVal !== undefined
+      ? step.leftVal
+      : (step.i !== null && step.i !== undefined ? traceInput[step.i] : '-');
+    const rightValue = step.rightVal !== undefined
+      ? step.rightVal
+      : (step.j !== null && step.j !== undefined ? traceInput[step.j] : '-');
+    const equalLabel = step.equal === undefined ? '-' : step.equal ? 'Yes' : 'No';
+
+    traceStateEl.innerHTML = `
+      <div class="trace-kv"><span class="trace-key">i</span><span class="trace-val">${asDisplay(step.i)}</span></div>
+      <div class="trace-kv"><span class="trace-key">j</span><span class="trace-val">${asDisplay(step.j)}</span></div>
+      <div class="trace-kv"><span class="trace-key">nums[i]</span><span class="trace-val">${asDisplay(leftValue)}</span></div>
+      <div class="trace-kv"><span class="trace-key">nums[j]</span><span class="trace-val">${asDisplay(rightValue)}</span></div>
+      <div class="trace-kv"><span class="trace-key">comparisons</span><span class="trace-val">${asDisplay(step.comparisons)}</span></div>
+      <div class="trace-kv"><span class="trace-key">equal?</span><span class="trace-val">${equalLabel}</span></div>
+      <div class="trace-kv"><span class="trace-key">return</span><span class="trace-val">${toPyBool(step.returnValue)}</span></div>
+    `;
+  }
+
+  function renderTraceMetrics(step) {
+    const totalSteps = tracePrograms[traceMode].steps.length;
+    const progress = traceStepIndex < 0 ? 0 : traceStepIndex + 1;
+    const opLabel = traceMode === 'set' ? 'Lookups so far' : 'Comparisons so far';
+    const opValue = traceMode === 'set' ? (step.lookups || 0) : (step.comparisons || 0);
+    const worst = maxOperations(traceMode, traceInput.length);
+    const modeLabel = traceMode === 'set' ? 'Set Trace' : 'Brute Trace';
+
+    traceMetricsEl.innerHTML = `
+      <div class="metric-chip"><span class="label">Mode</span><span class="value">${modeLabel}</span></div>
+      <div class="metric-chip"><span class="label">Input Size</span><span class="value">n = ${traceInput.length}</span></div>
+      <div class="metric-chip"><span class="label">Progress</span><span class="value">${progress}/${totalSteps}</span></div>
+      <div class="metric-chip"><span class="label">${opLabel}</span><span class="value">${opValue}</span></div>
+      <div class="metric-chip"><span class="label">Worst-case ops (this n)</span><span class="value">${worst}</span></div>
+      <div class="metric-chip"><span class="label">Current Input</span><span class="value">${escapeHtml(formatArray(traceInput))}</span></div>
+    `;
+  }
+
+  function stopTraceAuto() {
+    if (traceTimer) {
+      clearInterval(traceTimer);
+      traceTimer = null;
+      tracePlayBtn.textContent = 'Auto Play';
+    }
+  }
+
+  function renderTraceStep() {
+    if (traceStepIndex < 0) {
+      highlightTraceLine(null);
+      renderTraceInput(null, null, []);
+      renderTraceState(traceMode === 'set' ? { seen: [] } : {});
+      renderTraceMetrics({});
+      traceCoachEl.textContent = getCoachMessage({});
+      traceStatusEl.innerHTML = `Dataset <code>${escapeHtml(formatArray(traceInput))}</code> loaded. Press <strong>Next</strong> to execute line-by-line.`;
+      return;
+    }
+
+    const step = tracePrograms[traceMode].steps[traceStepIndex];
+    const dupIndices = step.dupIndices || [];
+    highlightTraceLine(step.line);
+    renderTraceInput(
+      step.activeIdx === undefined ? null : step.activeIdx,
+      step.compareIdx === undefined ? null : step.compareIdx,
+      dupIndices
+    );
+    renderTraceState(step);
+    renderTraceMetrics(step);
+    traceCoachEl.textContent = getCoachMessage(step);
+    traceStatusEl.textContent = step.msg;
+
+    if (step.done) {
+      stopTraceAuto();
+      traceStatusEl.innerHTML = `<strong>Return ${toPyBool(step.returnValue)}</strong> · ${step.msg}`;
+    }
+  }
+
+  function setTraceMode(mode) {
+    traceMode = mode;
+    traceStepIndex = -1;
+    stopTraceAuto();
+    traceModeSetBtn.classList.toggle('active', mode === 'set');
+    traceModeBruteBtn.classList.toggle('active', mode === 'brute');
+    rebuildTracePrograms();
+    renderTraceCode();
+    renderTraceStep();
+  }
+
+  function setTraceDataset(datasetKey) {
+    if (!datasetLibrary[datasetKey]) return;
+    traceInput = [...datasetLibrary[datasetKey]];
+    datasetBtns.forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.dataset === datasetKey);
+    });
+    traceStepIndex = -1;
+    stopTraceAuto();
+    rebuildTracePrograms();
+    renderTraceCode();
+    renderTraceStep();
+  }
+
+  function nextTraceStep() {
+    const total = tracePrograms[traceMode].steps.length;
+    if (traceStepIndex < total - 1) {
+      traceStepIndex += 1;
+      renderTraceStep();
+    } else {
+      stopTraceAuto();
+    }
+  }
+
+  function prevTraceStep() {
+    if (traceStepIndex > -1) {
+      traceStepIndex -= 1;
+      renderTraceStep();
+    }
+  }
+
+  function bindQuiz() {
+    const quizExplain = {
+      q1: 'Set membership is average O(1), so scanning n elements gives average O(n).',
+      q2: 'A set stores unique values and supports fast membership checks through hashing.',
+      q3: 'No repeated value appears in [1,2,3,4], so the function returns False.'
+    };
+
+    quizItems.forEach(item => {
+      const qId = item.dataset.q;
+      const correctChoice = item.dataset.answer;
+      const options = Array.from(item.querySelectorAll('.quiz-option'));
+      const feedback = document.getElementById(`quiz-${qId}-feedback`);
+      const correctBtn = options.find(btn => btn.dataset.choice === correctChoice);
+
+      options.forEach(btn => {
+        btn.addEventListener('click', () => {
+          options.forEach(opt => {
+            opt.classList.remove('correct', 'wrong');
+          });
+
+          if (btn.dataset.choice === correctChoice) {
+            btn.classList.add('correct');
+            feedback.innerHTML = `<strong>Correct.</strong> ${quizExplain[qId]}`;
+          } else {
+            btn.classList.add('wrong');
+            if (correctBtn) correctBtn.classList.add('correct');
+            feedback.innerHTML = `<strong>Not yet.</strong> ${quizExplain[qId]}`;
+          }
+        });
+      });
+    });
+  }
+
+  if (
+    traceCodeEl &&
+    traceInputRowEl &&
+    traceStateEl &&
+    traceStatusEl &&
+    traceMetricsEl &&
+    traceCoachEl &&
+    traceModeSetBtn &&
+    traceModeBruteBtn &&
+    tracePrevBtn &&
+    traceNextBtn &&
+    tracePlayBtn &&
+    traceResetBtn &&
+    datasetBtns.length
+  ) {
+    traceModeSetBtn.addEventListener('click', () => setTraceMode('set'));
+    traceModeBruteBtn.addEventListener('click', () => setTraceMode('brute'));
+    tracePrevBtn.addEventListener('click', prevTraceStep);
+    traceNextBtn.addEventListener('click', nextTraceStep);
+
+    datasetBtns.forEach(btn => {
+      btn.addEventListener('click', () => setTraceDataset(btn.dataset.dataset));
+    });
+
+    tracePlayBtn.addEventListener('click', () => {
+      if (traceTimer) {
+        stopTraceAuto();
+        return;
+      }
+
+      const total = tracePrograms[traceMode].steps.length;
+      if (traceStepIndex >= total - 1) {
+        traceStepIndex = -1;
+        renderTraceStep();
+      }
+
+      tracePlayBtn.textContent = 'Pause';
+      traceTimer = setInterval(() => {
+        if (traceStepIndex >= tracePrograms[traceMode].steps.length - 1) {
+          stopTraceAuto();
+        } else {
+          nextTraceStep();
+        }
+      }, 1000);
+    });
+
+    traceResetBtn.addEventListener('click', () => {
+      stopTraceAuto();
+      traceStepIndex = -1;
+      renderTraceStep();
+    });
+
+    setTraceMode('set');
+    setTraceDataset('case1');
+  }
+
+  if (quizItems.length) {
+    bindQuiz();
+  }
 </script>
 </body>
 </html>
