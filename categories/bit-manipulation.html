@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOG PREP MEAL - Bit Manipulation</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d111a;
+    --surface: #171c29;
+    --border: #2d354c;
+    --text: #e7ebf5;
+    --text-muted: #94a0bb;
+    --accent: #22d3ee;
+    --accent-dim: rgba(34, 211, 238, 0.14);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    background: radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.08), transparent 40%), radial-gradient(circle at 80% 10%, rgba(91, 156, 245, 0.08), transparent 35%), var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  .panel {
+    width: min(760px, 100%);
+    background: rgba(23, 28, 41, 0.74);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 34px 28px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+  }
+
+  .eyebrow {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border-radius: 6px;
+    padding: 3px 8px;
+    margin-bottom: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  h1 {
+    font-size: 34px;
+    letter-spacing: -0.4px;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+  }
+
+  .list {
+    margin: 8px 0 24px;
+    padding-left: 18px;
+    color: var(--text-muted);
+  }
+
+  .list li {
+    margin: 8px 0;
+  }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 640px) {
+    h1 { font-size: 28px; }
+    .panel { padding: 26px 20px; }
+  }
+</style>
+</head>
+<body>
+  <main class="panel">
+    <span class="eyebrow">MOG PREP MEAL · CATEGORY</span>
+    <h1>Bit Manipulation</h1>
+    <p>Apply bitwise operations to model state compactly and solve low-level optimization problems.</p>
+    <p>This page is intentionally kept as a clean placeholder. We can now expand it with problem patterns, example LeetCode questions, and implementation walkthroughs.</p>
+    <ul class="list">
+      <li>Core problem patterns</li>
+      <li>Representative LeetCode problems</li>
+      <li>Complexity analysis (time and space)</li>
+      <li>Common pitfalls and interview tips</li>
+    </ul>
+    <a href="../index.html">← Back to roadmap</a>
+  </main>
+</body>
+</html>

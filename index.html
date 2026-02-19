@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOG PREP MEAL - LeetCode Pattern Roadmap</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d111a;
+    --surface: #171c29;
+    --surface-bright: #212839;
+    --border: #2d354c;
+    --text: #e7ebf5;
+    --text-muted: #94a0bb;
+    --blue: #5b9cf5;
+    --blue-dim: rgba(91, 156, 245, 0.14);
+    --green: #4ade80;
+    --green-dim: rgba(74, 222, 128, 0.14);
+    --orange: #f59e42;
+    --orange-dim: rgba(245, 158, 66, 0.14);
+    --teal: #22d3ee;
+    --teal-dim: rgba(34, 211, 238, 0.14);
+    --red: #f87171;
+    --red-dim: rgba(248, 113, 113, 0.14);
+    --yellow: #f5c542;
+    --yellow-dim: rgba(245, 197, 66, 0.14);
+    --mint: #10b981;
+    --mint-dim: rgba(16, 185, 129, 0.14);
+    --rose: #fb7185;
+    --rose-dim: rgba(251, 113, 133, 0.14);
+    --lavender: #a78bfa;
+    --lavender-dim: rgba(167, 139, 250, 0.14);
+    --sky: #38bdf8;
+    --sky-dim: rgba(56, 189, 248, 0.14);
+    --indigo: #818cf8;
+    --indigo-dim: rgba(129, 140, 248, 0.14);
+    --radius: 14px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  .bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bg-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.08;
+    animation: orbFloat 20s ease-in-out infinite;
+  }
+
+  .bg-orb:nth-child(1) {
+    width: 620px;
+    height: 620px;
+    background: var(--blue);
+    top: -220px;
+    left: -100px;
+  }
+
+  .bg-orb:nth-child(2) {
+    width: 500px;
+    height: 500px;
+    background: var(--green);
+    top: 35%;
+    right: -160px;
+    animation-delay: -7s;
+    animation-duration: 24s;
+  }
+
+  .bg-orb:nth-child(3) {
+    width: 420px;
+    height: 420px;
+    background: var(--orange);
+    bottom: -120px;
+    left: 30%;
+    animation-delay: -11s;
+    animation-duration: 22s;
+  }
+
+  .bg-orb:nth-child(4) {
+    width: 340px;
+    height: 340px;
+    background: var(--teal);
+    top: 62%;
+    left: -120px;
+    animation-delay: -4s;
+    animation-duration: 28s;
+  }
+
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(70px, -55px) scale(1.1); }
+    50% { transform: translate(-45px, 65px) scale(0.92); }
+    75% { transform: translate(50px, 35px) scale(1.05); }
+  }
+
+  #particles {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 74px 20px 44px;
+  }
+
+  .logo {
+    width: 84px;
+    height: 84px;
+    margin: 0 auto 22px;
+    background: rgba(23, 28, 41, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    box-shadow: 0 0 44px rgba(34, 211, 238, 0.15), 0 0 90px rgba(34, 211, 238, 0.05);
+    animation: logoEntry 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .logo:hover {
+    transform: rotateY(180deg) scale(1.08);
+    box-shadow: 0 0 60px rgba(34, 211, 238, 0.25), 0 0 120px rgba(34, 211, 238, 0.1);
+  }
+
+  h1 {
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.6px;
+    margin-bottom: 10px;
+    animation: fadeUp 0.7s ease 0.2s both;
+  }
+
+  h1 .accent-a {
+    background: linear-gradient(135deg, var(--teal), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  h1 .accent-b {
+    background: linear-gradient(135deg, var(--yellow), var(--orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    color: var(--text-muted);
+    max-width: 640px;
+    margin: 0 auto 28px;
+    line-height: 1.72;
+    animation: fadeUp 0.7s ease 0.35s both;
+  }
+
+  .badges {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s ease 0.5s both;
+  }
+
+  .badge {
+    background: rgba(23, 28, 41, 0.72);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 100px;
+    padding: 7px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    transition: all 0.3s ease;
+  }
+
+  .badge:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    transform: translateY(-2px);
+  }
+
+  .badge .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    animation: dotPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes dotPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.55; transform: scale(0.82); }
+  }
+
+  .flow-wrap {
+    max-width: 960px;
+    margin: 0 auto 58px;
+    padding: 0 20px;
+    animation: fadeUp 0.7s ease 0.6s both;
+    perspective: 1200px;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 30px 20px;
+    background: rgba(23, 28, 41, 0.62);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    transform-style: preserve-3d;
+    transition: transform 0.4s ease;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .flow:hover {
+    transform: rotateX(2deg) rotateY(-2deg) scale(1.01);
+  }
+
+  .flow-node {
+    text-align: center;
+    padding: 12px 14px;
+    min-width: 160px;
+  }
+
+  .flow-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 23px;
+    margin: 0 auto 8px;
+    transition: all 0.35s ease;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+  }
+
+  .flow-node:hover .flow-icon {
+    transform: translateY(-5px) scale(1.08);
+  }
+
+  .flow-title {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+
+  .flow-desc {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .flow-arrow {
+    width: 52px;
+    height: 2px;
+    background: var(--yellow);
+    border-radius: 2px;
+    position: relative;
+    margin: 0 4px;
+  }
+
+  .flow-arrow::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: -3px;
+    border: 4px solid transparent;
+    border-left: 5px solid var(--yellow);
+  }
+
+  .flow-arrow::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    background: var(--yellow);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--yellow);
+    animation: dataPacket 2.4s ease-in-out infinite;
+  }
+
+  @keyframes dataPacket {
+    0% { left: 0; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { left: calc(100% - 6px); opacity: 0; }
+  }
+
+  .section-title {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    opacity: 0;
+    transform: translateY(18px);
+    transition: all 0.6s ease;
+  }
+
+  .section-title.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .section-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 13px;
+    margin-bottom: 36px;
+    opacity: 0;
+    transform: translateY(14px);
+    transition: all 0.6s ease 0.1s;
+  }
+
+  .section-sub.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cards {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 20px 56px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+  }
+
+  .card {
+    --accent: var(--blue);
+    --accent-dim: var(--blue-dim);
+    background: rgba(23, 28, 41, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius);
+    padding: 22px;
+    text-decoration: none;
+    color: var(--text);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card:hover {
+    border-color: rgba(255, 255, 255, 0.13);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.38), 0 0 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    opacity: 0;
+    transition: all 0.35s;
+    background: var(--accent);
+  }
+
+  .card:hover::before {
+    opacity: 1;
+    height: 3px;
+    box-shadow: 0 0 20px var(--accent);
+  }
+
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+    transition: none;
+    pointer-events: none;
+  }
+
+  .card:hover::after {
+    left: 100%;
+    transition: left 0.7s ease;
+  }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    transition: all 0.3s;
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+
+  .card:hover .card-icon {
+    transform: translateZ(10px) scale(1.1);
+  }
+
+  .card-title {
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .card-arrow {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-left: auto;
+    transition: all 0.3s;
+  }
+
+  .card:hover .card-arrow {
+    transform: translateX(5px);
+    color: var(--yellow);
+  }
+
+  .card-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 5px;
+    display: inline-block;
+    width: fit-content;
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.58;
+  }
+
+  .card-skills {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .card-skills span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    padding: 3px 8px;
+    background: rgba(13, 17, 26, 0.66);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    color: var(--text-muted);
+  }
+
+  .c-big-o { --accent: var(--rose); --accent-dim: var(--rose-dim); }
+  .c-arrays { --accent: var(--blue); --accent-dim: var(--blue-dim); }
+  .c-two-pointers { --accent: var(--teal); --accent-dim: var(--teal-dim); }
+  .c-sliding-window { --accent: var(--green); --accent-dim: var(--green-dim); }
+  .c-bit { --accent: var(--orange); --accent-dim: var(--orange-dim); }
+  .c-dp { --accent: var(--lavender); --accent-dim: var(--lavender-dim); }
+  .c-backtracking { --accent: var(--rose); --accent-dim: var(--rose-dim); }
+  .c-linked { --accent: var(--mint); --accent-dim: var(--mint-dim); }
+  .c-stacks { --accent: var(--yellow); --accent-dim: var(--yellow-dim); }
+  .c-queues { --accent: var(--sky); --accent-dim: var(--sky-dim); }
+  .c-btree { --accent: var(--green); --accent-dim: var(--green-dim); }
+  .c-bst { --accent: var(--indigo); --accent-dim: var(--indigo-dim); }
+  .c-heaps { --accent: var(--orange); --accent-dim: var(--orange-dim); }
+  .c-graphs { --accent: var(--red); --accent-dim: var(--red-dim); }
+
+  footer {
+    text-align: center;
+    padding: 34px 20px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  footer a {
+    color: var(--teal);
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  @keyframes logoEntry {
+    0% { opacity: 0; transform: rotateY(-180deg) scale(0.5); }
+    60% { transform: rotateY(20deg) scale(1.05); }
+    100% { opacity: 1; transform: rotateY(0) scale(1); }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 860px) {
+    h1 { font-size: 30px; }
+    .flow { justify-content: flex-start; }
+    .flow-arrow { transform: rotate(90deg); margin: 14px auto; }
+  }
+
+  @media (max-width: 768px) {
+    .cards { grid-template-columns: 1fr; }
+    .bg-orb { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-canvas">
+  <div class="bg-orb"></div>
+  <div class="bg-orb"></div>
+  <div class="bg-orb"></div>
+  <div class="bg-orb"></div>
+</div>
+<canvas id="particles"></canvas>
+
+<div class="content">
+  <section class="hero">
+    <div class="logo">🧠</div>
+    <h1><span class="accent-a">MOG PREP MEAL</span> <span class="accent-b">Roadmap</span></h1>
+    <p class="hero-sub">A visual, pattern-first structure for solving LeetCode problems. Start with core categories, learn reusable techniques, and build interview-ready problem solving habits.</p>
+    <div class="badges">
+      <div class="badge"><span class="dot" style="background:var(--teal)"></span>LeetCode Patterns</div>
+      <div class="badge"><span class="dot" style="background:var(--green)"></span>Interview Prep</div>
+      <div class="badge"><span class="dot" style="background:var(--blue)"></span>GitHub Pages Ready</div>
+      <div class="badge"><span class="dot" style="background:var(--yellow)"></span>Complexity Focus</div>
+    </div>
+  </section>
+
+  <section class="flow-wrap">
+    <div class="flow" id="flowDiagram">
+      <div class="flow-node">
+        <div class="flow-icon" style="background:var(--blue-dim);color:var(--blue);">🧩</div>
+        <div class="flow-title">Read Problem</div>
+        <div class="flow-desc">Constraints & Goal</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <div class="flow-icon" style="background:var(--teal-dim);color:var(--teal);">🔎</div>
+        <div class="flow-title">Find Pattern</div>
+        <div class="flow-desc">Category Match</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <div class="flow-icon" style="background:var(--green-dim);color:var(--green);">⚙️</div>
+        <div class="flow-title">Build Solution</div>
+        <div class="flow-desc">Correctness First</div>
+      </div>
+      <div class="flow-arrow"></div>
+      <div class="flow-node">
+        <div class="flow-icon" style="background:var(--yellow-dim);color:var(--yellow);">⏱</div>
+        <div class="flow-title">Optimize</div>
+        <div class="flow-desc">Time & Space</div>
+      </div>
+    </div>
+  </section>
+
+  <h2 class="section-title">Array Patterns</h2>
+  <p class="section-sub">Core sequence-based strategies for linear data.</p>
+  <div class="cards">
+    <a href="categories/big-o-notation.html" class="card c-big-o">
+      <div class="card-head">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Big O Notation</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">FUNDAMENTAL</div>
+      <div class="card-desc">Understand time and space complexity to compare solutions, justify optimizations, and choose scalable approaches.</div>
+      <div class="card-skills"><span>O(1)</span><span>O(n)</span><span>O(log n)</span><span>Space</span></div>
+    </a>
+
+    <a href="categories/arrays.html" class="card c-arrays">
+      <div class="card-head">
+        <div class="card-icon">🔢</div>
+        <div class="card-title">Arrays</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">CATEGORY</div>
+      <div class="card-desc">Foundation for indexing, prefix/suffix ideas, and in-place operations that appear across many interview questions.</div>
+      <div class="card-skills"><span>Indexing</span><span>Traversal</span><span>Prefix Sum</span><span>In-place</span></div>
+    </a>
+
+    <a href="categories/arrays-two-pointers.html" class="card c-two-pointers">
+      <div class="card-head">
+        <div class="card-icon">↔️</div>
+        <div class="card-title">Arrays Two Pointers</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">PATTERN</div>
+      <div class="card-desc">Use left and right pointers to shrink search space and solve pair, partition, and sorted-array problems efficiently.</div>
+      <div class="card-skills"><span>Two Sum</span><span>Partition</span><span>Sorted Input</span><span>O(n)</span></div>
+    </a>
+
+    <a href="categories/arrays-sliding-window.html" class="card c-sliding-window">
+      <div class="card-head">
+        <div class="card-icon">🪟</div>
+        <div class="card-title">Arrays Sliding Window</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">PATTERN</div>
+      <div class="card-desc">Track dynamic subarrays by expanding and shrinking a window while maintaining constraints and best results.</div>
+      <div class="card-skills"><span>Subarray</span><span>Frequency Map</span><span>Window Size</span><span>Amortized</span></div>
+    </a>
+  </div>
+
+  <h2 class="section-title">Core Techniques</h2>
+  <p class="section-sub">Reusable strategies for state, search, and combinatorics.</p>
+  <div class="cards">
+    <a href="categories/bit-manipulation.html" class="card c-bit">
+      <div class="card-head">
+        <div class="card-icon">🧮</div>
+        <div class="card-title">Bit Manipulation</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">TECHNIQUE</div>
+      <div class="card-desc">Binary operations for masks, parity checks, power-of-two logic, and memory-efficient state handling.</div>
+      <div class="card-skills"><span>XOR</span><span>Bitmask</span><span>Shifts</span><span>Flags</span></div>
+    </a>
+
+    <a href="categories/dynamic-programming.html" class="card c-dp">
+      <div class="card-head">
+        <div class="card-icon">📈</div>
+        <div class="card-title">Dynamic Programming</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">TECHNIQUE</div>
+      <div class="card-desc">Break problems into overlapping subproblems and store previous results to avoid repeated computation.</div>
+      <div class="card-skills"><span>Memoization</span><span>Tabulation</span><span>State Design</span><span>Transitions</span></div>
+    </a>
+
+    <a href="categories/backtracking.html" class="card c-backtracking">
+      <div class="card-head">
+        <div class="card-icon">🌲</div>
+        <div class="card-title">Backtracking</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">TECHNIQUE</div>
+      <div class="card-desc">Systematically explore candidates, prune invalid branches, and construct combinations, permutations, and search trees.</div>
+      <div class="card-skills"><span>DFS</span><span>Pruning</span><span>Choices</span><span>Undo Step</span></div>
+    </a>
+  </div>
+
+  <h2 class="section-title">Data Structures</h2>
+  <p class="section-sub">Structure-driven problem solving for common interview domains.</p>
+  <div class="cards">
+    <a href="categories/linked-lists.html" class="card c-linked">
+      <div class="card-head">
+        <div class="card-icon">🔗</div>
+        <div class="card-title">Linked Lists</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">STRUCTURE</div>
+      <div class="card-desc">Pointer movement, cycle detection, reversal patterns, and node-level modifications without random indexing.</div>
+      <div class="card-skills"><span>Fast/Slow</span><span>Reverse</span><span>Merge</span><span>Dummy Node</span></div>
+    </a>
+
+    <a href="categories/stacks.html" class="card c-stacks">
+      <div class="card-head">
+        <div class="card-icon">📚</div>
+        <div class="card-title">Stacks</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">STRUCTURE</div>
+      <div class="card-desc">LIFO behavior for parsing, monotonic stacks, and maintaining recent candidates with efficient push/pop operations.</div>
+      <div class="card-skills"><span>LIFO</span><span>Monotonic</span><span>Parsing</span><span>Span</span></div>
+    </a>
+
+    <a href="categories/queues.html" class="card c-queues">
+      <div class="card-head">
+        <div class="card-icon">🚶</div>
+        <div class="card-title">Queues</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">STRUCTURE</div>
+      <div class="card-desc">FIFO access for level-order processing, scheduling, and breadth-first traversals across states.</div>
+      <div class="card-skills"><span>FIFO</span><span>BFS</span><span>Deque</span><span>Level Order</span></div>
+    </a>
+
+    <a href="categories/binary-trees.html" class="card c-btree">
+      <div class="card-head">
+        <div class="card-icon">🌳</div>
+        <div class="card-title">Binary Trees</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">STRUCTURE</div>
+      <div class="card-desc">Recursive and iterative traversals, subtree decomposition, and path-based reasoning for hierarchical data.</div>
+      <div class="card-skills"><span>DFS</span><span>BFS</span><span>Recursion</span><span>Paths</span></div>
+    </a>
+
+    <a href="categories/binary-search-trees.html" class="card c-bst">
+      <div class="card-head">
+        <div class="card-icon">🌲</div>
+        <div class="card-title">Binary Search Trees</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">STRUCTURE</div>
+      <div class="card-desc">Order-aware traversal and search where left &lt; root &lt; right enables pruning and efficient lookup logic.</div>
+      <div class="card-skills"><span>Inorder</span><span>Range Query</span><span>Insert/Delete</span><span>Balance</span></div>
+    </a>
+
+    <a href="categories/heaps.html" class="card c-heaps">
+      <div class="card-head">
+        <div class="card-icon">⛰</div>
+        <div class="card-title">Heaps</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">STRUCTURE</div>
+      <div class="card-desc">Priority-based processing with min/max heaps for top-k queries, streaming median, and scheduling problems.</div>
+      <div class="card-skills"><span>Priority Queue</span><span>Top K</span><span>Greedy</span><span>Log n</span></div>
+    </a>
+
+    <a href="categories/graphs.html" class="card c-graphs">
+      <div class="card-head">
+        <div class="card-icon">🕸</div>
+        <div class="card-title">Graphs</div>
+        <div class="card-arrow">→</div>
+      </div>
+      <div class="card-tag">STRUCTURE</div>
+      <div class="card-desc">Model relations as nodes and edges, then solve connectivity, shortest path, and traversal problems.</div>
+      <div class="card-skills"><span>Adjacency</span><span>DFS/BFS</span><span>Dijkstra</span><span>Union-Find</span></div>
+    </a>
+  </div>
+</div>
+
+<footer>MOG PREP MEAL · <a href="https://leetcode.com/" target="_blank" rel="noopener noreferrer">LeetCode</a> · <a href="https://github.com/jaywee92/MOG-PREP-MEAL" target="_blank" rel="noopener noreferrer">GitHub Repo</a></footer>
+
+<script>
+(function() {
+  const canvas = document.getElementById('particles');
+  const ctx = canvas.getContext('2d');
+  let w;
+  let h;
+  const particles = [];
+  const colors = [
+    'rgba(91,156,245,.28)',
+    'rgba(74,222,128,.28)',
+    'rgba(245,158,66,.28)',
+    'rgba(34,211,238,.28)',
+    'rgba(245,197,66,.28)'
+  ];
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 55; i += 1) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 2 + 0.5,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      life: Math.random() * 360
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+
+    for (const p of particles) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.life += 0.5;
+
+      if (p.x < 0) p.x = w;
+      if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h;
+      if (p.y > h) p.y = 0;
+
+      const alpha = 0.25 + Math.sin(p.life * 0.02) * 0.2;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color.replace(/[\d.]+\)$/, `${alpha})`);
+      ctx.fill();
+    }
+
+    for (let i = 0; i < particles.length; i += 1) {
+      for (let j = i + 1; j < particles.length; j += 1) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(255,255,255,${0.035 * (1 - dist / 120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  draw();
+})();
+
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', event => {
+    const rect = card.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -6;
+    const rotateY = ((x - centerX) / centerX) * 6;
+    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px) scale(1.02)`;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+const flowDiagram = document.getElementById('flowDiagram');
+if (flowDiagram) {
+  flowDiagram.addEventListener('mousemove', event => {
+    const rect = flowDiagram.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    flowDiagram.style.transform = `rotateX(${y * -8}deg) rotateY(${x * 8}deg) scale(1.01)`;
+  });
+
+  flowDiagram.addEventListener('mouseleave', () => {
+    flowDiagram.style.transform = '';
+  });
+}
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.section-title, .section-sub, .card').forEach(el => observer.observe(el));
+
+document.querySelectorAll('.cards').forEach(group => {
+  const cards = group.querySelectorAll('.card');
+  const groupObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        cards.forEach((card, index) => {
+          setTimeout(() => card.classList.add('visible'), index * 110);
+        });
+        groupObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  groupObserver.observe(group);
+});
+</script>
+
+</body>
+</html>
