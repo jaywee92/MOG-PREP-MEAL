@@ -4,1761 +4,883 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MOG PREP MEAL - Arrays - Duplicate Values</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Baloo+2:wght@600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0d111a;
-    --surface: #171c29;
-    --surface-strong: #20283a;
-    --border: #2f3952;
-    --text: #e8ecf6;
-    --muted: #96a3c0;
-    --cyan: #22d3ee;
-    --cyan-dim: rgba(34, 211, 238, 0.14);
-    --blue: #5b9cf5;
-    --blue-dim: rgba(91, 156, 245, 0.14);
-    --green: #4ade80;
-    --green-dim: rgba(74, 222, 128, 0.14);
-    --yellow: #f5c542;
-    --yellow-dim: rgba(245, 197, 66, 0.14);
-    --red: #f87171;
-    --red-dim: rgba(248, 113, 113, 0.14);
-    --violet: #a78bfa;
-    --violet-dim: rgba(167, 139, 250, 0.14);
+    --bg: #f5fbff;
+    --ink: #17314a;
+    --ink-soft: #41607d;
+    --card: #ffffff;
+    --line: #cde4f5;
+    --brand: #1f8ef1;
+    --brand-soft: #dff0ff;
+    --mint: #17b978;
+    --mint-soft: #daf9ec;
+    --sun: #f6b73c;
+    --sun-soft: #fff2d7;
+    --rose: #ef5d7a;
+    --rose-soft: #ffe1e8;
+    --purple: #6d6be9;
+    --purple-soft: #e5e4ff;
+    --shadow: 0 14px 34px rgba(31, 142, 241, 0.12);
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    color: var(--ink);
     background:
-      radial-gradient(circle at 8% 12%, rgba(34, 211, 238, 0.12), transparent 36%),
-      radial-gradient(circle at 90% 2%, rgba(91, 156, 245, 0.12), transparent 30%),
-      radial-gradient(circle at 72% 90%, rgba(74, 222, 128, 0.09), transparent 34%),
-      var(--bg);
-    color: var(--text);
+      radial-gradient(circle at 12% 8%, #dff0ff 0 18%, transparent 35%),
+      radial-gradient(circle at 90% 12%, #fff2d7 0 14%, transparent 31%),
+      radial-gradient(circle at 80% 88%, #daf9ec 0 16%, transparent 33%),
+      linear-gradient(180deg, #f8fcff 0%, #f2f8ff 100%);
     min-height: 100vh;
   }
 
-  .wrap {
-    width: min(1120px, 100%);
+  .page {
+    width: min(980px, 100%);
     margin: 0 auto;
-    padding: 34px 20px 56px;
+    padding: 28px 16px 44px;
   }
-
-  .topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .crumb {
-    text-decoration: none;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--cyan);
-  }
-
-  .crumb:hover { text-decoration: underline; }
 
   .hero {
-    background: rgba(23, 28, 41, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    backdrop-filter: blur(10px);
-    padding: 28px 24px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-    margin-bottom: 20px;
-  }
-
-  .eyebrow {
-    display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--cyan);
-    background: var(--cyan-dim);
-    border-radius: 6px;
-    padding: 3px 9px;
-    margin-bottom: 12px;
-    letter-spacing: 0.2px;
-  }
-
-  h1 {
-    font-size: clamp(26px, 4vw, 42px);
-    letter-spacing: -0.5px;
-    margin-bottom: 10px;
-  }
-
-  .lead {
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 880px;
-  }
-
-  .hero-grid {
-    margin-top: 18px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
-  }
-
-  .pill {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(13, 17, 26, 0.52);
-    border-radius: 10px;
-    padding: 10px 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-  }
-
-  .learning-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 10px;
-    margin-top: 10px;
-  }
-
-  .learning-step {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(13, 17, 26, 0.5);
-    border-radius: 10px;
-    padding: 11px;
-  }
-
-  .learning-step h3 {
-    font-size: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 6px;
-    color: #dbe2f3;
-  }
-
-  .learning-step p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.55;
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .card {
-    background: rgba(23, 28, 41, 0.74);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
+    background: linear-gradient(135deg, #e6f3ff 0%, #f4ecff 100%);
+    border: 1px solid #d3e7f8;
+    border-radius: 22px;
     padding: 22px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
   }
 
-  .section-title {
-    font-size: 22px;
-    letter-spacing: -0.3px;
-    margin-bottom: 8px;
-  }
-
-  .sub {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.65;
-    margin-bottom: 14px;
-  }
-
-  .problem {
-    display: grid;
-    grid-template-columns: 1.2fr .8fr;
-    gap: 14px;
-  }
-
-  .box {
-    background: rgba(13, 17, 26, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 14px;
-  }
-
-  .k {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 8px;
-  }
-
-  .box p {
-    color: var(--muted);
-    line-height: 1.6;
-    font-size: 14px;
-  }
-
-  .examples {
-    display: grid;
-    gap: 8px;
-  }
-
-  .ex {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    line-height: 1.6;
-    color: #d5dbee;
-    background: rgba(13, 17, 26, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 10px;
-  }
-
-  .split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-
-  .algo {
-    background: rgba(13, 17, 26, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 14px;
-  }
-
-  .algo h3 {
-    font-size: 15px;
-    margin-bottom: 10px;
-  }
-
-  .algo h3 span {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    margin-left: 8px;
-    padding: 2px 7px;
-    border-radius: 999px;
-    vertical-align: middle;
-  }
-
-  .tag-bad {
-    background: var(--red-dim);
-    color: var(--red);
-  }
-
-  .tag-good {
-    background: var(--green-dim);
-    color: var(--green);
-  }
-
-  .bars {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .stack-title {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--muted);
-    margin-bottom: 8px;
-    text-align: center;
-  }
-
-  .stack {
-    display: grid;
-    gap: 6px;
-  }
-
-  .bar {
-    height: 36px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .bar.on {
-    transform: scale(1.03);
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
-  }
-
-  .bar-a { background: linear-gradient(135deg, #f472b6, #ec4899); }
-  .bar-b { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
-  .bar-c { background: linear-gradient(135deg, #34d399, #10b981); }
-  .bar-d { background: linear-gradient(135deg, #818cf8, #6366f1); }
-  .bar-e { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
-
-  .arrow {
-    width: 44px;
-    height: 4px;
-    background: var(--yellow);
-    border-radius: 4px;
-    position: relative;
-  }
-
-  .arrow::after {
-    content: '';
-    position: absolute;
-    right: -6px;
-    top: -4px;
-    border: 6px solid transparent;
-    border-left: 8px solid var(--yellow);
-  }
-
-  .muted {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.6;
-    margin-top: 10px;
-  }
-
-  .sim {
-    display: grid;
-    grid-template-columns: 1.2fr .8fr;
-    gap: 14px;
-  }
-
-  .input-row {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-  }
-
-  .chip {
-    min-width: 44px;
-    height: 36px;
-    border-radius: 9px;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    background: rgba(13, 17, 26, 0.62);
-    color: #dbe2f3;
-    transition: all 0.2s;
-  }
-
-  .chip.active {
-    background: var(--cyan-dim);
-    color: var(--cyan);
-    border-color: rgba(34, 211, 238, 0.65);
-    transform: translateY(-1px);
-  }
-
-  .chip.compare {
-    background: var(--yellow-dim);
-    color: var(--yellow);
-    border-color: rgba(245, 197, 66, 0.65);
-  }
-
-  .chip.dup {
-    background: var(--red-dim);
-    color: var(--red);
-    border-color: rgba(248, 113, 113, 0.65);
-  }
-
-  .panel {
-    background: rgba(13, 17, 26, 0.58);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 12px;
-    padding: 12px;
-  }
-
-  .row {
+  .top-line {
     display: flex;
     justify-content: space-between;
-    gap: 8px;
-    margin-bottom: 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: #d9e0f2;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
   }
 
-  .status {
-    color: var(--muted);
+  .back-link {
+    text-decoration: none;
+    color: var(--brand);
+    font-weight: 700;
     font-size: 13px;
-    line-height: 1.6;
-    min-height: 46px;
   }
 
-  .actions {
-    margin-top: 12px;
+  .back-link:hover {
+    text-decoration: underline;
+  }
+
+  .tools {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
   }
 
   button {
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    background: rgba(13, 17, 26, 0.62);
-    color: #d9e0f2;
-    border-radius: 8px;
+    border: 1px solid #bfdcf1;
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 999px;
     padding: 8px 12px;
     cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    transition: all 0.2s;
+    font-size: 12px;
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   button:hover {
-    border-color: rgba(255, 255, 255, 0.25);
     transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(31, 142, 241, 0.18);
   }
 
-  .set-view {
-    min-height: 122px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-content: flex-start;
+  h1 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(30px, 5vw, 44px);
+    line-height: 1.05;
+    letter-spacing: 0.2px;
+    margin-bottom: 8px;
+    color: #103455;
   }
 
-  .set-item {
-    background: var(--violet-dim);
-    color: var(--violet);
-    border: 1px solid rgba(167, 139, 250, 0.55);
-    border-radius: 999px;
-    padding: 6px 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
+  .hero p {
+    font-size: 17px;
+    line-height: 1.55;
+    color: #2d5374;
   }
 
-  .cmp {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 8px;
-    overflow: hidden;
-    border-radius: 10px;
-  }
-
-  .cmp th,
-  .cmp td {
-    text-align: left;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 10px;
-    font-size: 13px;
-  }
-
-  .cmp th {
-    background: rgba(13, 17, 26, 0.66);
-    font-family: 'JetBrains Mono', monospace;
-    color: #dbe2f3;
-  }
-
-  .cmp td {
-    color: var(--muted);
-    background: rgba(13, 17, 26, 0.45);
-  }
-
-  pre {
-    background: rgba(10, 13, 20, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 14px;
-    overflow: auto;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    line-height: 1.7;
-    color: #dde4f4;
-  }
-
-  .code-grid {
+  .flow-bar {
+    margin-top: 14px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-  }
-
-  .trace-shell {
-    margin-bottom: 12px;
-  }
-
-  .trace-setup {
-    margin-bottom: 10px;
-  }
-
-  .trace-datasets {
-    display: flex;
-    flex-wrap: wrap;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
     gap: 8px;
-    margin: 2px 0 8px;
   }
 
-  .dataset-btn {
-    border-radius: 999px;
-    padding: 6px 10px;
+  .flow-bar span {
+    text-align: center;
     font-size: 11px;
-  }
-
-  .dataset-btn.active {
-    background: var(--violet-dim);
-    color: var(--violet);
-    border-color: rgba(167, 139, 250, 0.55);
-  }
-
-  .trace-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-
-  .trace-tab.active {
-    background: var(--cyan-dim);
-    color: var(--cyan);
-    border-color: rgba(34, 211, 238, 0.55);
-  }
-
-  .trace-grid {
-    display: grid;
-    grid-template-columns: 1.05fr .95fr;
-    gap: 14px;
-  }
-
-  .trace-panel {
-    padding: 14px;
-  }
-
-  .trace-code {
-    display: grid;
-    gap: 6px;
-    margin-top: 8px;
-  }
-
-  .trace-line {
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 9px;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    background: rgba(10, 13, 20, 0.75);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    line-height: 1.5;
-    color: #dde4f4;
-  }
-
-  .trace-line.active {
-    border-color: rgba(34, 211, 238, 0.55);
-    background: rgba(34, 211, 238, 0.12);
-    box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.18) inset;
-  }
-
-  .trace-ln {
-    text-align: right;
-    color: var(--muted);
-  }
-
-  .trace-txt {
-    white-space: pre;
-  }
-
-  .trace-state {
-    display: grid;
-    gap: 7px;
-    margin: 8px 0 10px;
-  }
-
-  .trace-kv {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: #d9e0f2;
-    padding-bottom: 7px;
-    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
-  }
-
-  .trace-kv:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
-
-  .trace-key {
-    color: var(--muted);
-  }
-
-  .trace-val {
-    text-align: right;
-  }
-
-  .trace-set {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 6px;
-  }
-
-  .trace-pill {
-    border-radius: 999px;
-    padding: 3px 8px;
-    border: 1px solid rgba(167, 139, 250, 0.55);
-    background: var(--violet-dim);
-    color: var(--violet);
-    font-size: 11px;
-  }
-
-  .trace-pill.empty {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.05);
-    color: var(--muted);
-  }
-
-  .trace-metrics {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(120px, 1fr));
-    gap: 8px;
-    margin-bottom: 10px;
-  }
-
-  .metric-chip {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(13, 17, 26, 0.5);
+    font-weight: 700;
+    padding: 7px 6px;
     border-radius: 9px;
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--ink-soft);
+  }
+
+  .section {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 18px;
+    margin-top: 14px;
+  }
+
+  .section h2 {
+    font-family: 'Baloo 2', sans-serif;
+    font-size: clamp(27px, 4vw, 36px);
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+
+  .section p {
+    color: var(--ink-soft);
+    line-height: 1.62;
+    font-size: 16px;
+  }
+
+  .task-box {
+    margin-top: 10px;
+    border: 2px dashed #9cccf2;
+    background: #f5fbff;
+    border-radius: 14px;
+    padding: 12px;
+    font-size: 19px;
+    line-height: 1.4;
+    font-weight: 700;
+    color: #123a60;
+  }
+
+  .problem-grid {
+    margin-top: 10px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .problem-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #f9fdff;
+    padding: 11px;
+  }
+
+  .problem-card h3 {
+    font-size: 13px;
+    color: var(--brand);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .example-row {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .example-chip {
+    background: var(--sun-soft);
+    border: 1px solid #f7d48d;
+    color: #8f6100;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 10px;
+  }
+
+  .visual-shell {
+    margin-top: 10px;
+    background: linear-gradient(180deg, #fbfeff 0%, #f5fbff 100%);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 12px;
+  }
+
+  .preset-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .preset-btn.active {
+    background: var(--purple-soft);
+    border-color: #bbb8ff;
+    color: #403db4;
+  }
+
+  .array-label,
+  .seen-label,
+  .stats-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .array-row,
+  .seen-row {
+    min-height: 58px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .cell,
+  .seen-item {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    border: 2px solid #b7d9f2;
+    background: #fff;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .cell.active {
+    border-color: #1f8ef1;
+    background: var(--brand-soft);
+    color: #0f5ea5;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(31, 142, 241, 0.25);
+  }
+
+  .cell.match {
+    border-color: #ef5d7a;
+    background: var(--rose-soft);
+    color: #ad2142;
+  }
+
+  .seen-item {
+    border-color: #9de3c8;
+    background: var(--mint-soft);
+    color: #0f7950;
+    width: auto;
+    min-width: 46px;
+    padding: 0 10px;
+  }
+
+  .seen-empty {
+    font-size: 13px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .story {
+    border-left: 4px solid var(--brand);
+    background: #eaf5ff;
+    border-radius: 10px;
+    padding: 10px;
+    color: #244f76;
+    font-size: 15px;
+    line-height: 1.55;
+    min-height: 74px;
+    margin-bottom: 10px;
+  }
+
+  .progress-track {
+    width: 100%;
+    height: 10px;
+    background: #e8f2fb;
+    border-radius: 999px;
+    overflow: hidden;
+    margin-bottom: 10px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #20bfff, #6d6be9);
+    transition: width 0.25s ease;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: 10px;
+  }
+
+  .stat {
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background: #fff;
     padding: 8px;
   }
 
-  .metric-chip .label {
-    display: block;
-    font-size: 10px;
-    color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 3px;
-  }
-
-  .metric-chip .value {
-    font-size: 13px;
-    color: #dbe2f3;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .trace-coach {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-left: 3px solid var(--cyan);
-    background: rgba(34, 211, 238, 0.08);
-    border-radius: 8px;
-    padding: 9px 10px;
-    font-size: 12px;
-    line-height: 1.55;
-    color: #d3e8f4;
-    margin-bottom: 10px;
-  }
-
-  .quiz-shell {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(13, 17, 26, 0.5);
-    border-radius: 12px;
-    padding: 12px;
-    margin-bottom: 12px;
-  }
-
-  .quiz-list {
-    display: grid;
-    gap: 10px;
-  }
-
-  .quiz-item {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    background: rgba(13, 17, 26, 0.45);
-    padding: 10px;
-  }
-
-  .quiz-q {
-    font-size: 13px;
-    color: #dbe2f3;
-    margin-bottom: 7px;
-    line-height: 1.5;
-  }
-
-  .quiz-options {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-  }
-
-  .quiz-option {
+  .stat .k {
     font-size: 11px;
-    padding: 6px 10px;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
   }
 
-  .quiz-option.correct {
-    border-color: rgba(74, 222, 128, 0.65);
-    background: var(--green-dim);
-    color: var(--green);
+  .stat .v {
+    font-size: 15px;
+    font-weight: 700;
+    color: #103455;
   }
 
-  .quiz-option.wrong {
-    border-color: rgba(248, 113, 113, 0.65);
-    background: var(--red-dim);
-    color: var(--red);
+  .control-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
   }
 
-  .quiz-feedback {
-    margin-top: 7px;
-    font-size: 12px;
-    color: var(--muted);
-    min-height: 18px;
-  }
-
-  .notes {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-    gap: 10px;
-    margin-top: 12px;
-  }
-
-  .note {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(13, 17, 26, 0.5);
-    border-radius: 10px;
+  .pseudo {
+    margin-top: 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #f8fcff;
     padding: 10px;
   }
 
-  .note h4 {
-    font-size: 12px;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 6px;
-    color: #dbe2f3;
-  }
-
-  .note p {
-    color: var(--muted);
+  .pseudo-line {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
     font-size: 13px;
-    line-height: 1.55;
+    color: #1f3f60;
+    line-height: 1.6;
+    padding: 2px 0;
   }
 
-  @media (max-width: 920px) {
-    .problem,
-    .split,
-    .sim,
-    .code-grid,
-    .trace-grid {
+  .pseudo-line b {
+    color: #7ca4c4;
+    text-align: right;
+    font-weight: 700;
+  }
+
+  .code-wrap {
+    margin-top: 10px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .code-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    background: #ecf6ff;
+    border-bottom: 1px solid var(--line);
+    padding: 8px 10px;
+  }
+
+  .code-lang {
+    font-size: 12px;
+    font-weight: 700;
+    color: #24557f;
+  }
+
+  pre {
+    margin: 0;
+    padding: 14px;
+    background: #fbfdff;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #12395d;
+  }
+
+  .conclusion-list {
+    margin-top: 10px;
+    display: grid;
+    gap: 8px;
+  }
+
+  .conclusion-item {
+    border: 1px solid var(--line);
+    border-radius: 11px;
+    background: #f8fcff;
+    padding: 10px;
+    color: #2a5378;
+    line-height: 1.5;
+    font-size: 15px;
+  }
+
+  .next-step {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 11px;
+    background: var(--mint-soft);
+    border: 1px solid #9de3c8;
+    color: #0f7950;
+    font-weight: 700;
+    font-size: 15px;
+  }
+
+  .next-step a {
+    color: #0d6947;
+  }
+
+  .pulse {
+    animation: pulse 1.25s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.04);
+    }
+  }
+
+  body.calm * {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  body.large {
+    font-size: 18px;
+  }
+
+  body.large .section p,
+  body.large .story,
+  body.large .conclusion-item,
+  body.large .task-box {
+    font-size: 18px;
+  }
+
+  @media (max-width: 860px) {
+    .flow-bar {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .problem-grid,
+    .stats-grid {
       grid-template-columns: 1fr;
-    }
-
-    .trace-metrics {
-      grid-template-columns: 1fr;
-    }
-
-    .bars {
-      grid-template-columns: 1fr;
-    }
-
-    .arrow {
-      width: 4px;
-      height: 26px;
-      margin: 0 auto;
-    }
-
-    .arrow::after {
-      right: -4px;
-      top: 24px;
-      border: 6px solid transparent;
-      border-top: 8px solid var(--yellow);
-      border-left: 6px solid transparent;
     }
   }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <a class="crumb" href="../index.html">&larr; Back to roadmap</a>
-      <a class="crumb" href="https://leetcode.com/problems/contains-duplicate/" target="_blank" rel="noopener noreferrer">Open LeetCode #217</a>
-    </div>
-
+  <main class="page">
     <header class="hero">
-      <span class="eyebrow">ARRAYS · TASK 01</span>
-      <h1>Duplicate Values (Contains Duplicate)</h1>
-      <p class="lead">This is the first Arrays problem in your roadmap. The explanation below mirrors the visual flow from your video: first the nested-loop thinking, then the optimized set-based approach.</p>
-      <div class="hero-grid">
-        <div class="pill">Goal: return <code>true</code> if any number appears at least twice.</div>
-        <div class="pill">Input: integer array <code>nums</code></div>
-        <div class="pill">LeetCode: <code>217. Contains Duplicate</code></div>
+      <div class="top-line">
+        <a class="back-link" href="../index.html">&larr; Back to roadmap</a>
+        <div class="tools">
+          <button id="calmBtn" type="button">Calm Mode</button>
+          <button id="largeBtn" type="button">Large Text</button>
+        </div>
+      </div>
+      <h1>Arrays #1: Duplicate Values</h1>
+      <p>One clear lesson, one clear result. We solve this together in six simple parts so it feels easy on the first read.</p>
+      <div class="flow-bar">
+        <span>Task</span>
+        <span>Problem</span>
+        <span>Visualization</span>
+        <span>Pseudocode</span>
+        <span>Python</span>
+        <span>Conclusion</span>
       </div>
     </header>
 
-    <main class="grid">
-      <section class="card">
-        <h2 class="section-title">Learning Route (Max Retention)</h2>
-        <p class="sub">Use this order to maximize understanding and memory: intuition first, execution second, recall third.</p>
-        <div class="learning-grid">
-          <article class="learning-step">
-            <h3>1) Understand The Goal</h3>
-            <p>Focus on what must be returned, not how. The question only asks: duplicate exists or not.</p>
-          </article>
-          <article class="learning-step">
-            <h3>2) Run Set Simulation</h3>
-            <p>Step through the input and repeat the invariant: <code>seen</code> stores all unique values processed so far.</p>
-          </article>
-          <article class="learning-step">
-            <h3>3) Compare To Brute Force</h3>
-            <p>Switch to brute-force trace and observe how fast comparisons explode versus hash lookups.</p>
-          </article>
-          <article class="learning-step">
-            <h3>4) Verify With Quiz</h3>
-            <p>Answer short checks without peeking. If wrong, replay the trace for the same dataset immediately.</p>
-          </article>
-        </div>
-      </section>
+    <section class="section">
+      <h2>1) Task</h2>
+      <p>We receive a list of numbers called <code>nums</code>.</p>
+      <div class="task-box">Return <code>true</code> if any number appears more than once. Otherwise return <code>false</code>.</div>
+    </section>
 
-      <section class="card">
-        <h2 class="section-title">Problem Snapshot</h2>
-        <p class="sub">Given an integer array <code>nums</code>, return <code>true</code> if any value appears at least twice, and <code>false</code> if every element is distinct.</p>
-        <div class="problem">
-          <div class="box">
-            <div class="k">DESCRIPTION</div>
-            <p>We only need to know if a duplicate exists. As soon as we detect one repeated value, we can stop and return immediately.</p>
-          </div>
-          <div class="examples">
-            <div class="ex">Input: [1,2,3,1]\nOutput: true</div>
-            <div class="ex">Input: [1,2,3,4]\nOutput: false</div>
-            <div class="ex">Input: [1,1,1,3,3,4,3,2,4,2]\nOutput: true</div>
-          </div>
-        </div>
-      </section>
+    <section class="section">
+      <h2>2) Problem</h2>
+      <p>What do we know, and what do we need to decide?</p>
+      <div class="problem-grid">
+        <article class="problem-card">
+          <h3>Input</h3>
+          <p>A list of integers like <code>[1,2,3,1]</code>.</p>
+        </article>
+        <article class="problem-card">
+          <h3>Output</h3>
+          <p><code>true</code> if there is a duplicate, otherwise <code>false</code>.</p>
+        </article>
+        <article class="problem-card">
+          <h3>Good Example</h3>
+          <p><code>[1,2,3,1]</code> -> <strong>true</strong> (because 1 appears twice).</p>
+        </article>
+        <article class="problem-card">
+          <h3>No Duplicate Example</h3>
+          <p><code>[1,2,3,4]</code> -> <strong>false</strong> (all numbers are different).</p>
+        </article>
+      </div>
+      <div class="example-row">
+        <span class="example-chip">Duplicate = same value appears again</span>
+        <span class="example-chip">Set = remembers unique values</span>
+      </div>
+    </section>
 
-      <section class="card">
-        <h2 class="section-title">Visual Idea (Like in the Video)</h2>
-        <p class="sub">The first idea compares elements with nested loops. This works, but repeats many comparisons.</p>
-        <div class="split">
-          <article class="algo">
-            <h3>Approach A: Nested Loops <span class="tag-bad">O(n^2)</span></h3>
-            <div class="bars" id="loopBoard">
-              <div>
-                <div class="stack-title">OUTER LOOP</div>
-                <div class="stack">
-                  <div class="bar bar-a" data-col="left" data-pos="0">B</div>
-                  <div class="bar bar-b" data-col="left" data-pos="1">A</div>
-                  <div class="bar bar-c" data-col="left" data-pos="2">E</div>
-                  <div class="bar bar-d" data-col="left" data-pos="3">F</div>
-                  <div class="bar bar-e" data-col="left" data-pos="4">D</div>
-                </div>
-              </div>
-              <div class="arrow"></div>
-              <div>
-                <div class="stack-title">INNER LOOP</div>
-                <div class="stack">
-                  <div class="bar bar-b" data-col="right" data-pos="0">A</div>
-                  <div class="bar bar-a" data-col="right" data-pos="1">B</div>
-                  <div class="bar bar-c" data-col="right" data-pos="2">E</div>
-                  <div class="bar bar-a" data-col="right" data-pos="3">B</div>
-                  <div class="bar bar-e" data-col="right" data-pos="4">C</div>
-                </div>
-              </div>
-            </div>
-            <p class="muted">This matches your slide logic: outer pointer fixes one value, inner pointer scans remaining values to check equality.</p>
-          </article>
+    <section class="section">
+      <h2>3) Visualization (Step by Step)</h2>
+      <p>Press <strong>Next</strong>. We scan from left to right and keep a memory box called <code>seen</code>.</p>
 
-          <article class="algo">
-            <h3>Approach B: Hash Set <span class="tag-good">O(n)</span></h3>
-            <p class="muted">Use a set named <code>seen</code>. Iterate once:</p>
-            <p class="muted">1) If current number is already in <code>seen</code> -> duplicate found -> return <code>true</code></p>
-            <p class="muted">2) Otherwise add number to <code>seen</code></p>
-            <p class="muted">3) If loop ends, return <code>false</code></p>
-            <p class="muted">Set lookup/insert is average O(1), so total runtime is O(n).</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2 class="section-title">Step-by-Step Simulation (Set Approach)</h2>
-        <p class="sub">Input used in the animation: <code>[1, 2, 3, 1]</code>. Click through exactly like the presentation flow.</p>
-        <div class="sim">
-          <div class="panel">
-            <div class="k">INPUT ARRAY</div>
-            <div class="input-row" id="inputRow"></div>
-            <div class="row"><span>Current index</span><strong id="idx">-</strong></div>
-            <div class="row"><span>Current value</span><strong id="val">-</strong></div>
-            <div class="row"><span>Already in seen?</span><strong id="inSeen">-</strong></div>
-            <div class="status" id="statusText">Press <strong>Next</strong> to start the walkthrough.</div>
-            <div class="actions">
-              <button id="prevBtn" type="button">Prev</button>
-              <button id="nextBtn" type="button">Next</button>
-              <button id="playBtn" type="button">Auto Play</button>
-              <button id="resetBtn" type="button">Reset</button>
-            </div>
-          </div>
-
-          <div class="panel">
-            <div class="k">SEEN SET</div>
-            <div class="set-view" id="setView"></div>
-            <p class="muted" style="margin-top:10px;">
-              Note from the video: <code>set()</code> creates an empty set. <code>{}</code> creates an empty dictionary in Python.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2 class="section-title">Complexity Comparison</h2>
-        <table class="cmp">
-          <thead>
-            <tr>
-              <th>Approach</th>
-              <th>Time</th>
-              <th>Space</th>
-              <th>When to use</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Nested loops</td>
-              <td>O(n^2)</td>
-              <td>O(1)</td>
-              <td>Only as baseline or for learning pointer comparisons</td>
-            </tr>
-            <tr>
-              <td>Set (hash table)</td>
-              <td>O(n)</td>
-              <td>O(n)</td>
-              <td>Best practical choice for this problem</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <section class="card">
-        <h2 class="section-title">Reference Implementations (Python)</h2>
-        <div class="trace-shell">
-          <div class="panel trace-setup">
-            <div class="k">PRACTICE DATASET</div>
-            <div class="trace-datasets">
-              <button class="dataset-btn active" type="button" data-dataset="case1">Case 1 · [1,2,3,1]</button>
-              <button class="dataset-btn" type="button" data-dataset="case2">Case 2 · [1,2,3,4]</button>
-              <button class="dataset-btn" type="button" data-dataset="case3">Case 3 · [1,1,1,3,3,4,3,2,4,2]</button>
-            </div>
-            <p class="muted" style="margin-top:0;">Change the dataset and replay both algorithms. This builds transfer, not just memorization.</p>
-          </div>
-
-          <div class="trace-tabs">
-            <button id="traceModeSet" class="trace-tab active" type="button">Set Trace (O(n))</button>
-            <button id="traceModeBrute" class="trace-tab" type="button">Brute Force Trace (O(n^2))</button>
-          </div>
-          <p class="sub" style="margin-bottom:10px;">Run both implementations line-by-line on <code>[1, 2, 3, 1]</code> and follow how variables change at each executed line.</p>
-
-          <div class="trace-grid">
-            <div class="panel trace-panel">
-              <div class="k">ACTIVE CODE</div>
-              <div class="trace-code" id="traceCode"></div>
-            </div>
-
-            <div class="panel trace-panel">
-              <div class="k">RUNTIME STATE</div>
-              <div class="input-row" id="traceInputRow"></div>
-              <div class="trace-metrics" id="traceMetrics"></div>
-              <div class="trace-state" id="traceState"></div>
-              <div class="trace-coach" id="traceCoach">Coach starts after your first step.</div>
-              <div class="status" id="traceStatus">Press <strong>Next</strong> to execute the selected algorithm line-by-line.</div>
-              <div class="actions">
-                <button id="tracePrevBtn" type="button">Prev</button>
-                <button id="traceNextBtn" type="button">Next</button>
-                <button id="tracePlayBtn" type="button">Auto Play</button>
-                <button id="traceResetBtn" type="button">Reset</button>
-              </div>
-            </div>
-          </div>
+      <div class="visual-shell">
+        <div class="preset-row">
+          <button class="preset-btn active" type="button" data-case="a">Case A: [1,2,3,1]</button>
+          <button class="preset-btn" type="button" data-case="b">Case B: [1,2,3,4]</button>
+          <button class="preset-btn" type="button" data-case="c">Case C: [2,5,2,9]</button>
         </div>
 
-        <div class="quiz-shell">
-          <div class="k">QUICK MASTERY CHECK</div>
-          <div class="quiz-list">
-            <article class="quiz-item" data-q="q1" data-answer="b">
-              <p class="quiz-q">Q1: What is the average time complexity of the set approach for this problem?</p>
-              <div class="quiz-options">
-                <button type="button" class="quiz-option" data-choice="a">O(n^2)</button>
-                <button type="button" class="quiz-option" data-choice="b">O(n)</button>
-                <button type="button" class="quiz-option" data-choice="c">O(log n)</button>
-              </div>
-              <div class="quiz-feedback" id="quiz-q1-feedback"></div>
-            </article>
+        <div class="array-label">Array</div>
+        <div class="array-row" id="arrayRow"></div>
 
-            <article class="quiz-item" data-q="q2" data-answer="a">
-              <p class="quiz-q">Q2: Why does a set help detect duplicates quickly?</p>
-              <div class="quiz-options">
-                <button type="button" class="quiz-option" data-choice="a">Fast membership checks + unique storage</button>
-                <button type="button" class="quiz-option" data-choice="b">Because sets are always sorted</button>
-                <button type="button" class="quiz-option" data-choice="c">Because they store duplicate counts by default</button>
-              </div>
-              <div class="quiz-feedback" id="quiz-q2-feedback"></div>
-            </article>
+        <div class="seen-label">Seen (our memory set)</div>
+        <div class="seen-row" id="seenRow"></div>
 
-            <article class="quiz-item" data-q="q3" data-answer="c">
-              <p class="quiz-q">Q3: For input <code>[1,2,3,4]</code>, what does the function return?</p>
-              <div class="quiz-options">
-                <button type="button" class="quiz-option" data-choice="a">Error</button>
-                <button type="button" class="quiz-option" data-choice="b">True</button>
-                <button type="button" class="quiz-option" data-choice="c">False</button>
-              </div>
-              <div class="quiz-feedback" id="quiz-q3-feedback"></div>
-            </article>
-          </div>
+        <div class="story" id="story">Ready. Click Next to start.</div>
+
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
         </div>
 
-        <div class="notes">
-          <div class="note">
-            <h4>SET PROPERTY: UNIQUE</h4>
-            <p>Duplicates are not stored twice. This is exactly why duplicate detection is natural with a set.</p>
-          </div>
-          <div class="note">
-            <h4>SET PROPERTY: UNORDERED</h4>
-            <p>Order is not guaranteed. We only care about membership, not position.</p>
-          </div>
-          <div class="note">
-            <h4>SET INTERNALLY</h4>
-            <p>Python sets are hash-table based. Average lookup/insert/delete is O(1).</p>
-          </div>
-          <div class="note">
-            <h4>INTERVIEW TIP</h4>
-            <p>State the brute-force complexity first, then justify the set optimization clearly.</p>
-          </div>
+        <div class="stats-label">Live stats</div>
+        <div class="stats-grid">
+          <div class="stat"><div class="k">Index</div><div class="v" id="statIndex">-</div></div>
+          <div class="stat"><div class="k">Current value</div><div class="v" id="statValue">-</div></div>
+          <div class="stat"><div class="k">In seen?</div><div class="v" id="statInSeen">-</div></div>
+          <div class="stat"><div class="k">Answer</div><div class="v" id="statAnswer">Not yet</div></div>
         </div>
-      </section>
-    </main>
-  </div>
+
+        <div class="control-row">
+          <button id="prevBtn" type="button">Prev</button>
+          <button id="nextBtn" type="button">Next</button>
+          <button id="playBtn" type="button">Auto Play</button>
+          <button id="resetBtn" type="button">Reset</button>
+          <button id="speakBtn" type="button">Read This Step</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>4) Pseudocode</h2>
+      <p>This is the simple plan, without Python syntax details.</p>
+      <div class="pseudo" aria-label="Pseudocode">
+        <div class="pseudo-line"><b>1</b><span>Create empty set called <code>seen</code></span></div>
+        <div class="pseudo-line"><b>2</b><span>For each value in <code>nums</code>:</span></div>
+        <div class="pseudo-line"><b>3</b><span>If value is already in <code>seen</code>, return <code>true</code></span></div>
+        <div class="pseudo-line"><b>4</b><span>Else add value to <code>seen</code></span></div>
+        <div class="pseudo-line"><b>5</b><span>If loop ends, return <code>false</code></span></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>5) Python Code</h2>
+      <p>Same idea, now in real Python.</p>
+      <div class="code-wrap">
+        <div class="code-top">
+          <span class="code-lang">Python 3</span>
+          <button id="copyCodeBtn" type="button">Copy Code</button>
+        </div>
+<pre><code id="pythonCode">def contains_duplicate(nums):
+    seen = set()
+
+    for value in nums:
+        if value in seen:
+            return True
+        seen.add(value)
+
+    return False</code></pre>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>6) Conclusion</h2>
+      <p>You now understand this problem in a clean, beginner-friendly way.</p>
+      <div class="conclusion-list">
+        <div class="conclusion-item">We scan once from left to right.</div>
+        <div class="conclusion-item">The set stores only unique values we already saw.</div>
+        <div class="conclusion-item">If a value is already in the set, we instantly return <code>true</code>.</div>
+        <div class="conclusion-item">Time complexity is <strong>O(n)</strong>, space complexity is <strong>O(n)</strong>.</div>
+      </div>
+      <div class="next-step">Next recommended lesson: <a href="arrays-two-pointers.html">Arrays Two Pointers</a>.</div>
+    </section>
+  </main>
 
 <script>
-  const steps = [
-    { idx: 0, value: 1, inSeen: false, setAfter: [1], done: false, msg: '1 is new. Add it to seen.' },
-    { idx: 1, value: 2, inSeen: false, setAfter: [1, 2], done: false, msg: '2 is new. Add it to seen.' },
-    { idx: 2, value: 3, inSeen: false, setAfter: [1, 2, 3], done: false, msg: '3 is new. Add it to seen.' },
-    { idx: 3, value: 1, inSeen: true, setAfter: [1, 2, 3], done: true, msg: '1 is already in seen. Duplicate found -> return true.' }
-  ];
+  const cases = {
+    a: [1, 2, 3, 1],
+    b: [1, 2, 3, 4],
+    c: [2, 5, 2, 9]
+  };
 
-  const input = [1, 2, 3, 1];
-  const rowEl = document.getElementById('inputRow');
-  const idxEl = document.getElementById('idx');
-  const valEl = document.getElementById('val');
-  const inSeenEl = document.getElementById('inSeen');
-  const statusText = document.getElementById('statusText');
-  const setView = document.getElementById('setView');
-
+  const presetButtons = Array.from(document.querySelectorAll('.preset-btn'));
+  const calmBtn = document.getElementById('calmBtn');
+  const largeBtn = document.getElementById('largeBtn');
+  const arrayRow = document.getElementById('arrayRow');
+  const seenRow = document.getElementById('seenRow');
+  const story = document.getElementById('story');
+  const progressFill = document.getElementById('progressFill');
+  const statIndex = document.getElementById('statIndex');
+  const statValue = document.getElementById('statValue');
+  const statInSeen = document.getElementById('statInSeen');
+  const statAnswer = document.getElementById('statAnswer');
   const prevBtn = document.getElementById('prevBtn');
   const nextBtn = document.getElementById('nextBtn');
   const playBtn = document.getElementById('playBtn');
   const resetBtn = document.getElementById('resetBtn');
+  const speakBtn = document.getElementById('speakBtn');
+  const copyCodeBtn = document.getElementById('copyCodeBtn');
+  const pythonCode = document.getElementById('pythonCode');
 
-  let stepIndex = -1;
-  let timer = null;
-
-  function renderInput(activeIdx, duplicateIdx) {
-    rowEl.innerHTML = '';
-    input.forEach((num, index) => {
-      const chip = document.createElement('div');
-      chip.className = 'chip';
-      if (index === activeIdx) chip.classList.add('active');
-      if (duplicateIdx !== null && index === duplicateIdx) chip.classList.add('dup');
-      chip.textContent = num;
-      rowEl.appendChild(chip);
-    });
-  }
-
-  function renderSet(values) {
-    setView.innerHTML = '';
-    if (!values.length) {
-      const muted = document.createElement('div');
-      muted.className = 'muted';
-      muted.textContent = '(empty set)';
-      setView.appendChild(muted);
-      return;
-    }
-    values.forEach(v => {
-      const item = document.createElement('span');
-      item.className = 'set-item';
-      item.textContent = v;
-      setView.appendChild(item);
-    });
-  }
-
-  function renderStep() {
-    if (stepIndex < 0) {
-      idxEl.textContent = '-';
-      valEl.textContent = '-';
-      inSeenEl.textContent = '-';
-      statusText.innerHTML = 'Press <strong>Next</strong> to start the walkthrough.';
-      renderInput(null, null);
-      renderSet([]);
-      return;
-    }
-
-    const s = steps[stepIndex];
-    idxEl.textContent = s.idx;
-    valEl.textContent = s.value;
-    inSeenEl.textContent = s.inSeen ? 'Yes' : 'No';
-    statusText.textContent = s.msg;
-    renderInput(s.idx, s.done ? s.idx : null);
-    renderSet(s.setAfter);
-
-    if (s.done) {
-      stopAuto();
-      statusText.innerHTML = '<strong>Duplicate detected.</strong> ' + s.msg;
-    }
-  }
-
-  function nextStep() {
-    if (stepIndex < steps.length - 1) {
-      stepIndex += 1;
-      renderStep();
-    } else {
-      stopAuto();
-    }
-  }
-
-  function prevStep() {
-    if (stepIndex > -1) {
-      stepIndex -= 1;
-      renderStep();
-    }
-  }
+  let activeCase = 'a';
+  let input = [...cases[activeCase]];
+  let steps = [];
+  let stepPointer = 0;
+  let autoTimer = null;
 
   function stopAuto() {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
+    if (autoTimer) {
+      clearInterval(autoTimer);
+      autoTimer = null;
       playBtn.textContent = 'Auto Play';
     }
   }
 
-  prevBtn.addEventListener('click', prevStep);
-  nextBtn.addEventListener('click', nextStep);
+  function buildSteps(nums) {
+    const list = [];
+    const seen = new Set();
+
+    list.push({
+      text: `Start. We will read the array ${JSON.stringify(nums)} from left to right.`,
+      activeIndex: null,
+      seenValues: [],
+      answer: 'Not yet',
+      inSeen: '-'
+    });
+
+    for (let i = 0; i < nums.length; i += 1) {
+      const value = nums[i];
+      const seenValuesBefore = Array.from(seen);
+      list.push({
+        text: `Look at index ${i}. Value is ${value}.`,
+        activeIndex: i,
+        seenValues: seenValuesBefore,
+        answer: 'Not yet',
+        inSeen: '-'
+      });
+
+      const hasValue = seen.has(value);
+
+      if (hasValue) {
+        list.push({
+          text: `${value} is already inside seen. Duplicate found. Return true.`,
+          activeIndex: i,
+          matchIndices: [i, nums.indexOf(value)],
+          seenValues: seenValuesBefore,
+          answer: 'True',
+          inSeen: 'Yes',
+          done: true
+        });
+        return list;
+      }
+
+      seen.add(value);
+      list.push({
+        text: `${value} is new, so we add it to seen.`,
+        activeIndex: i,
+        seenValues: Array.from(seen),
+        answer: 'Not yet',
+        inSeen: 'No'
+      });
+    }
+
+    list.push({
+      text: 'We finished the full array and found no duplicate. Return false.',
+      activeIndex: null,
+      seenValues: Array.from(new Set(nums)),
+      answer: 'False',
+      inSeen: '-',
+      done: true
+    });
+
+    return list;
+  }
+
+  function renderArray(activeIndex, matchIndices) {
+    arrayRow.innerHTML = '';
+    input.forEach((value, i) => {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      if (i === activeIndex) {
+        cell.classList.add('active', 'pulse');
+      }
+      if (matchIndices && matchIndices.includes(i)) {
+        cell.classList.add('match');
+      }
+      cell.textContent = value;
+      arrayRow.appendChild(cell);
+    });
+  }
+
+  function renderSeen(seenValues) {
+    seenRow.innerHTML = '';
+    if (!seenValues.length) {
+      const empty = document.createElement('div');
+      empty.className = 'seen-empty';
+      empty.textContent = '(empty)';
+      seenRow.appendChild(empty);
+      return;
+    }
+
+    seenValues.forEach((value) => {
+      const token = document.createElement('span');
+      token.className = 'seen-item';
+      token.textContent = value;
+      seenRow.appendChild(token);
+    });
+  }
+
+  function renderStep() {
+    const step = steps[stepPointer];
+    if (!step) return;
+
+    renderArray(step.activeIndex, step.matchIndices || []);
+    renderSeen(step.seenValues || []);
+
+    story.textContent = step.text;
+
+    const progress = ((stepPointer + 1) / steps.length) * 100;
+    progressFill.style.width = `${progress}%`;
+
+    statIndex.textContent = step.activeIndex === null || step.activeIndex === undefined ? '-' : step.activeIndex;
+    statValue.textContent = step.activeIndex === null || step.activeIndex === undefined ? '-' : input[step.activeIndex];
+    statInSeen.textContent = step.inSeen || '-';
+    statAnswer.textContent = step.answer || 'Not yet';
+
+    prevBtn.disabled = stepPointer === 0;
+    nextBtn.disabled = stepPointer >= steps.length - 1;
+
+    if (step.done) {
+      stopAuto();
+    }
+  }
+
+  function resetWalkthrough() {
+    stopAuto();
+    stepPointer = 0;
+    renderStep();
+  }
+
+  function loadCase(key) {
+    activeCase = key;
+    input = [...cases[key]];
+    steps = buildSteps(input);
+    presetButtons.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.case === key);
+    });
+    resetWalkthrough();
+  }
+
+  presetButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      loadCase(btn.dataset.case);
+    });
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (stepPointer > 0) {
+      stepPointer -= 1;
+      renderStep();
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (stepPointer < steps.length - 1) {
+      stepPointer += 1;
+      renderStep();
+    }
+  });
 
   playBtn.addEventListener('click', () => {
-    if (timer) {
+    if (autoTimer) {
       stopAuto();
       return;
     }
 
-    if (stepIndex >= steps.length - 1) {
-      stepIndex = -1;
-      renderStep();
+    if (stepPointer >= steps.length - 1) {
+      stepPointer = 0;
     }
 
     playBtn.textContent = 'Pause';
-    timer = setInterval(() => {
-      if (stepIndex >= steps.length - 1) {
+    autoTimer = setInterval(() => {
+      if (stepPointer >= steps.length - 1) {
         stopAuto();
       } else {
-        nextStep();
+        stepPointer += 1;
+        renderStep();
       }
     }, 1100);
   });
 
-  resetBtn.addEventListener('click', () => {
-    stopAuto();
-    stepIndex = -1;
-    renderStep();
+  resetBtn.addEventListener('click', resetWalkthrough);
+
+  speakBtn.addEventListener('click', () => {
+    const currentStep = steps[stepPointer];
+    if (!currentStep || !('speechSynthesis' in window)) return;
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(currentStep.text);
+    utterance.rate = 0.96;
+    utterance.pitch = 1;
+    window.speechSynthesis.speak(utterance);
   });
 
-  let leftPos = 0;
-  let rightPos = 0;
-  const leftBars = Array.from(document.querySelectorAll('[data-col="left"]'));
-  const rightBars = Array.from(document.querySelectorAll('[data-col="right"]'));
+  calmBtn.addEventListener('click', () => {
+    document.body.classList.toggle('calm');
+    calmBtn.textContent = document.body.classList.contains('calm') ? 'Calm Mode: On' : 'Calm Mode';
+  });
 
-  function animateLoopBoard() {
-    leftBars.forEach((el, idx) => el.classList.toggle('on', idx === leftPos));
-    rightBars.forEach((el, idx) => el.classList.toggle('on', idx === rightPos));
-    rightPos += 1;
-    if (rightPos >= rightBars.length) {
-      rightPos = 0;
-      leftPos = (leftPos + 1) % leftBars.length;
+  largeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('large');
+    largeBtn.textContent = document.body.classList.contains('large') ? 'Large Text: On' : 'Large Text';
+  });
+
+  copyCodeBtn.addEventListener('click', async () => {
+    const codeText = pythonCode.textContent;
+    try {
+      await navigator.clipboard.writeText(codeText);
+      copyCodeBtn.textContent = 'Copied';
+      setTimeout(() => {
+        copyCodeBtn.textContent = 'Copy Code';
+      }, 1100);
+    } catch (error) {
+      copyCodeBtn.textContent = 'Copy failed';
+      setTimeout(() => {
+        copyCodeBtn.textContent = 'Copy Code';
+      }, 1100);
     }
-  }
+  });
 
-  setInterval(animateLoopBoard, 700);
-  renderStep();
-
-  const traceCodeEl = document.getElementById('traceCode');
-  const traceInputRowEl = document.getElementById('traceInputRow');
-  const traceStateEl = document.getElementById('traceState');
-  const traceStatusEl = document.getElementById('traceStatus');
-  const traceMetricsEl = document.getElementById('traceMetrics');
-  const traceCoachEl = document.getElementById('traceCoach');
-  const traceModeSetBtn = document.getElementById('traceModeSet');
-  const traceModeBruteBtn = document.getElementById('traceModeBrute');
-  const tracePrevBtn = document.getElementById('tracePrevBtn');
-  const traceNextBtn = document.getElementById('traceNextBtn');
-  const tracePlayBtn = document.getElementById('tracePlayBtn');
-  const traceResetBtn = document.getElementById('traceResetBtn');
-  const datasetBtns = Array.from(document.querySelectorAll('.dataset-btn'));
-  const quizItems = Array.from(document.querySelectorAll('.quiz-item'));
-
-  const datasetLibrary = {
-    case1: [1, 2, 3, 1],
-    case2: [1, 2, 3, 4],
-    case3: [1, 1, 1, 3, 3, 4, 3, 2, 4, 2]
-  };
-
-  let traceInput = [...datasetLibrary.case1];
-
-  function buildSetTrace(nums) {
-    const trace = [];
-    const seen = [];
-    const firstIndex = new Map();
-    let lookups = 0;
-
-    trace.push({
-      line: 1,
-      seen: [...seen],
-      lookups,
-      msg: 'Function call starts with nums.'
-    });
-
-    trace.push({
-      line: 2,
-      seen: [...seen],
-      lookups,
-      msg: 'Initialize an empty set: seen = set().'
-    });
-
-    for (let idx = 0; idx < nums.length; idx += 1) {
-      const value = nums[idx];
-      trace.push({
-        line: 3,
-        idx,
-        value,
-        seen: [...seen],
-        lookups,
-        activeIdx: idx,
-        msg: `Loop step: idx = ${idx}, value = ${value}.`
-      });
-
-      lookups += 1;
-      const firstIdx = firstIndex.has(value) ? firstIndex.get(value) : null;
-      const inSeen = firstIdx !== null;
-      trace.push({
-        line: 4,
-        idx,
-        value,
-        inSeen,
-        seen: [...seen],
-        lookups,
-        activeIdx: idx,
-        compareIdx: firstIdx,
-        msg: inSeen
-          ? `${value} is already in seen.`
-          : `${value} is not in seen.`
-      });
-
-      if (inSeen) {
-        trace.push({
-          line: 5,
-          idx,
-          value,
-          inSeen: true,
-          seen: [...seen],
-          lookups,
-          activeIdx: idx,
-          compareIdx: firstIdx,
-          dupIndices: [firstIdx, idx],
-          returnValue: true,
-          done: true,
-          msg: 'Duplicate found -> return True.'
-        });
-        return trace;
-      }
-
-      seen.push(value);
-      firstIndex.set(value, idx);
-      trace.push({
-        line: 6,
-        idx,
-        value,
-        inSeen: false,
-        seen: [...seen],
-        lookups,
-        activeIdx: idx,
-        msg: `Add ${value} to seen.`
-      });
-    }
-
-    trace.push({
-      line: 7,
-      seen: [...seen],
-      lookups,
-      returnValue: false,
-      done: true,
-      msg: 'Reached end of array with no duplicates -> return False.'
-    });
-
-    return trace;
-  }
-
-  function buildBruteforceTrace(nums) {
-    const trace = [];
-    const n = nums.length;
-    let comparisons = 0;
-
-    trace.push({
-      line: 1,
-      comparisons,
-      msg: 'Function call starts with nums.'
-    });
-
-    trace.push({
-      line: 2,
-      comparisons,
-      msg: `Set n = len(nums) = ${n}.`
-    });
-
-    for (let i = 0; i < n; i += 1) {
-      trace.push({
-        line: 3,
-        i,
-        comparisons,
-        activeIdx: i,
-        msg: `Outer loop selects i = ${i} (value ${nums[i]}).`
-      });
-
-      for (let j = i + 1; j < n; j += 1) {
-        trace.push({
-          line: 4,
-          i,
-          j,
-          comparisons,
-          activeIdx: i,
-          compareIdx: j,
-          msg: `Inner loop checks j = ${j} (value ${nums[j]}).`
-        });
-
-        comparisons += 1;
-        const equal = nums[i] === nums[j];
-        trace.push({
-          line: 5,
-          i,
-          j,
-          leftVal: nums[i],
-          rightVal: nums[j],
-          comparisons,
-          equal,
-          activeIdx: i,
-          compareIdx: j,
-          msg: `Compare nums[${i}] and nums[${j}] -> ${equal ? 'equal' : 'not equal'}.`
-        });
-
-        if (equal) {
-          trace.push({
-            line: 6,
-            i,
-            j,
-            leftVal: nums[i],
-            rightVal: nums[j],
-            comparisons,
-            equal: true,
-            activeIdx: i,
-            compareIdx: j,
-            dupIndices: [i, j],
-            returnValue: true,
-            done: true,
-            msg: 'Duplicate found -> return True.'
-          });
-          return trace;
-        }
-      }
-    }
-
-    trace.push({
-      line: 7,
-      comparisons,
-      returnValue: false,
-      done: true,
-      msg: 'No equal pair found -> return False.'
-    });
-
-    return trace;
-  }
-
-  function escapeHtml(value) {
-    return String(value)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;');
-  }
-
-  function asDisplay(value) {
-    return value === null || value === undefined ? '-' : String(value);
-  }
-
-  function toPyBool(value) {
-    if (value === true) return 'True';
-    if (value === false) return 'False';
-    return '-';
-  }
-
-  function formatArray(arr) {
-    return `[${arr.join(', ')}]`;
-  }
-
-  function renderTracePills(values) {
-    if (!values.length) {
-      return '<span class="trace-pill empty">empty</span>';
-    }
-    return values
-      .map(v => `<span class="trace-pill">${escapeHtml(v)}</span>`)
-      .join('');
-  }
-
-  const traceProgramDefs = {
-    set: {
-      lines: [
-        'def contains_duplicate(nums):',
-        '    seen = set()',
-        '    for idx, value in enumerate(nums):',
-        '        if value in seen:',
-        '            return True',
-        '        seen.add(value)',
-        '    return False'
-      ],
-      builder: buildSetTrace
-    },
-    brute: {
-      lines: [
-        'def contains_duplicate_bruteforce(nums):',
-        '    n = len(nums)',
-        '    for i in range(n):',
-        '        for j in range(i + 1, n):',
-        '            if nums[i] == nums[j]:',
-        '                return True',
-        '    return False'
-      ],
-      builder: buildBruteforceTrace
-    }
-  };
-
-  let tracePrograms = {};
-  let traceMode = 'set';
-  let traceStepIndex = -1;
-  let traceTimer = null;
-
-  function rebuildTracePrograms() {
-    tracePrograms = {
-      set: {
-        lines: traceProgramDefs.set.lines,
-        steps: traceProgramDefs.set.builder(traceInput)
-      },
-      brute: {
-        lines: traceProgramDefs.brute.lines,
-        steps: traceProgramDefs.brute.builder(traceInput)
-      }
-    };
-  }
-
-  function maxOperations(mode, n) {
-    if (mode === 'set') return n;
-    return (n * (n - 1)) / 2;
-  }
-
-  function getCoachMessage(step) {
-    if (!step || step.line === undefined) {
-      return 'Coach: before each click, predict the next line and variable change.';
-    }
-
-    if (traceMode === 'set') {
-      if (step.line === 2) {
-        return 'Invariant setup: before processing, seen is empty.';
-      }
-      if (step.line === 3) {
-        return 'Think ahead: after this iteration, seen should contain unique values from index 0..idx.';
-      }
-      if (step.line === 4) {
-        return step.inSeen
-          ? 'Decision point: membership is true, so algorithm can stop early.'
-          : 'Decision point: membership is false, so we must add this value.';
-      }
-      if (step.line === 6) {
-        return 'Invariant update: seen now includes this value exactly once.';
-      }
-      if (step.line === 5) {
-        return 'Early exit optimization: first duplicate is enough to answer the problem.';
-      }
-      if (step.line === 7) {
-        return 'No duplicate found after full scan. This is the worst case for set approach.';
-      }
-      return 'Track membership checks: each value triggers one set lookup.';
-    }
-
-    if (step.line === 3) {
-      return 'Outer loop picks a fixed left element. Inner loop will compare against all following elements.';
-    }
-    if (step.line === 4) {
-      return 'Inner loop grows quickly. Count how many pairs are tested.';
-    }
-    if (step.line === 5) {
-      return step.equal
-        ? 'Comparison is true. The algorithm can return immediately.'
-        : 'Comparison is false. Keep scanning for another matching pair.';
-    }
-    if (step.line === 6) {
-      return 'Early exit helps average runtime, but worst case remains O(n^2).';
-    }
-    if (step.line === 7) {
-      return 'All pairs checked with no match. This is the expensive path.';
-    }
-    return 'Brute force checks pair-by-pair, which scales poorly for large n.';
-  }
-
-  function renderTraceInput(activeIdx, compareIdx, dupIndices) {
-    traceInputRowEl.innerHTML = '';
-    traceInput.forEach((num, idx) => {
-      const chip = document.createElement('div');
-      chip.className = 'chip';
-      if (idx === activeIdx) chip.classList.add('active');
-      if (idx === compareIdx) chip.classList.add('compare');
-      if (dupIndices.includes(idx)) chip.classList.add('dup');
-      chip.textContent = num;
-      traceInputRowEl.appendChild(chip);
-    });
-  }
-
-  function renderTraceCode() {
-    const lines = tracePrograms[traceMode].lines;
-    traceCodeEl.innerHTML = lines
-      .map((line, idx) =>
-        `<div class="trace-line" data-trace-line="${idx + 1}">
-          <span class="trace-ln">${idx + 1}</span>
-          <span class="trace-txt">${escapeHtml(line)}</span>
-        </div>`)
-      .join('');
-  }
-
-  function highlightTraceLine(lineNumber) {
-    traceCodeEl.querySelectorAll('.trace-line').forEach(line => {
-      line.classList.remove('active');
-    });
-
-    if (lineNumber === null) return;
-    const activeLine = traceCodeEl.querySelector(`[data-trace-line="${lineNumber}"]`);
-    if (activeLine) activeLine.classList.add('active');
-  }
-
-  function renderTraceState(step) {
-    if (traceMode === 'set') {
-      const seenHtml = renderTracePills(step.seen || []);
-      traceStateEl.innerHTML = `
-        <div class="trace-kv"><span class="trace-key">index</span><span class="trace-val">${asDisplay(step.idx)}</span></div>
-        <div class="trace-kv"><span class="trace-key">value</span><span class="trace-val">${asDisplay(step.value)}</span></div>
-        <div class="trace-kv"><span class="trace-key">in seen?</span><span class="trace-val">${asDisplay(step.inSeen === undefined ? '-' : step.inSeen ? 'Yes' : 'No')}</span></div>
-        <div class="trace-kv"><span class="trace-key">set lookups</span><span class="trace-val">${asDisplay(step.lookups)}</span></div>
-        <div class="trace-kv"><span class="trace-key">seen set</span><span class="trace-set">${seenHtml}</span></div>
-        <div class="trace-kv"><span class="trace-key">return</span><span class="trace-val">${toPyBool(step.returnValue)}</span></div>
-      `;
-      return;
-    }
-
-    const leftValue = step.leftVal !== undefined
-      ? step.leftVal
-      : (step.i !== null && step.i !== undefined ? traceInput[step.i] : '-');
-    const rightValue = step.rightVal !== undefined
-      ? step.rightVal
-      : (step.j !== null && step.j !== undefined ? traceInput[step.j] : '-');
-    const equalLabel = step.equal === undefined ? '-' : step.equal ? 'Yes' : 'No';
-
-    traceStateEl.innerHTML = `
-      <div class="trace-kv"><span class="trace-key">i</span><span class="trace-val">${asDisplay(step.i)}</span></div>
-      <div class="trace-kv"><span class="trace-key">j</span><span class="trace-val">${asDisplay(step.j)}</span></div>
-      <div class="trace-kv"><span class="trace-key">nums[i]</span><span class="trace-val">${asDisplay(leftValue)}</span></div>
-      <div class="trace-kv"><span class="trace-key">nums[j]</span><span class="trace-val">${asDisplay(rightValue)}</span></div>
-      <div class="trace-kv"><span class="trace-key">comparisons</span><span class="trace-val">${asDisplay(step.comparisons)}</span></div>
-      <div class="trace-kv"><span class="trace-key">equal?</span><span class="trace-val">${equalLabel}</span></div>
-      <div class="trace-kv"><span class="trace-key">return</span><span class="trace-val">${toPyBool(step.returnValue)}</span></div>
-    `;
-  }
-
-  function renderTraceMetrics(step) {
-    const totalSteps = tracePrograms[traceMode].steps.length;
-    const progress = traceStepIndex < 0 ? 0 : traceStepIndex + 1;
-    const opLabel = traceMode === 'set' ? 'Lookups so far' : 'Comparisons so far';
-    const opValue = traceMode === 'set' ? (step.lookups || 0) : (step.comparisons || 0);
-    const worst = maxOperations(traceMode, traceInput.length);
-    const modeLabel = traceMode === 'set' ? 'Set Trace' : 'Brute Trace';
-
-    traceMetricsEl.innerHTML = `
-      <div class="metric-chip"><span class="label">Mode</span><span class="value">${modeLabel}</span></div>
-      <div class="metric-chip"><span class="label">Input Size</span><span class="value">n = ${traceInput.length}</span></div>
-      <div class="metric-chip"><span class="label">Progress</span><span class="value">${progress}/${totalSteps}</span></div>
-      <div class="metric-chip"><span class="label">${opLabel}</span><span class="value">${opValue}</span></div>
-      <div class="metric-chip"><span class="label">Worst-case ops (this n)</span><span class="value">${worst}</span></div>
-      <div class="metric-chip"><span class="label">Current Input</span><span class="value">${escapeHtml(formatArray(traceInput))}</span></div>
-    `;
-  }
-
-  function stopTraceAuto() {
-    if (traceTimer) {
-      clearInterval(traceTimer);
-      traceTimer = null;
-      tracePlayBtn.textContent = 'Auto Play';
-    }
-  }
-
-  function renderTraceStep() {
-    if (traceStepIndex < 0) {
-      highlightTraceLine(null);
-      renderTraceInput(null, null, []);
-      renderTraceState(traceMode === 'set' ? { seen: [] } : {});
-      renderTraceMetrics({});
-      traceCoachEl.textContent = getCoachMessage({});
-      traceStatusEl.innerHTML = `Dataset <code>${escapeHtml(formatArray(traceInput))}</code> loaded. Press <strong>Next</strong> to execute line-by-line.`;
-      return;
-    }
-
-    const step = tracePrograms[traceMode].steps[traceStepIndex];
-    const dupIndices = step.dupIndices || [];
-    highlightTraceLine(step.line);
-    renderTraceInput(
-      step.activeIdx === undefined ? null : step.activeIdx,
-      step.compareIdx === undefined ? null : step.compareIdx,
-      dupIndices
-    );
-    renderTraceState(step);
-    renderTraceMetrics(step);
-    traceCoachEl.textContent = getCoachMessage(step);
-    traceStatusEl.textContent = step.msg;
-
-    if (step.done) {
-      stopTraceAuto();
-      traceStatusEl.innerHTML = `<strong>Return ${toPyBool(step.returnValue)}</strong> · ${step.msg}`;
-    }
-  }
-
-  function setTraceMode(mode) {
-    traceMode = mode;
-    traceStepIndex = -1;
-    stopTraceAuto();
-    traceModeSetBtn.classList.toggle('active', mode === 'set');
-    traceModeBruteBtn.classList.toggle('active', mode === 'brute');
-    rebuildTracePrograms();
-    renderTraceCode();
-    renderTraceStep();
-  }
-
-  function setTraceDataset(datasetKey) {
-    if (!datasetLibrary[datasetKey]) return;
-    traceInput = [...datasetLibrary[datasetKey]];
-    datasetBtns.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.dataset === datasetKey);
-    });
-    traceStepIndex = -1;
-    stopTraceAuto();
-    rebuildTracePrograms();
-    renderTraceCode();
-    renderTraceStep();
-  }
-
-  function nextTraceStep() {
-    const total = tracePrograms[traceMode].steps.length;
-    if (traceStepIndex < total - 1) {
-      traceStepIndex += 1;
-      renderTraceStep();
-    } else {
-      stopTraceAuto();
-    }
-  }
-
-  function prevTraceStep() {
-    if (traceStepIndex > -1) {
-      traceStepIndex -= 1;
-      renderTraceStep();
-    }
-  }
-
-  function bindQuiz() {
-    const quizExplain = {
-      q1: 'Set membership is average O(1), so scanning n elements gives average O(n).',
-      q2: 'A set stores unique values and supports fast membership checks through hashing.',
-      q3: 'No repeated value appears in [1,2,3,4], so the function returns False.'
-    };
-
-    quizItems.forEach(item => {
-      const qId = item.dataset.q;
-      const correctChoice = item.dataset.answer;
-      const options = Array.from(item.querySelectorAll('.quiz-option'));
-      const feedback = document.getElementById(`quiz-${qId}-feedback`);
-      const correctBtn = options.find(btn => btn.dataset.choice === correctChoice);
-
-      options.forEach(btn => {
-        btn.addEventListener('click', () => {
-          options.forEach(opt => {
-            opt.classList.remove('correct', 'wrong');
-          });
-
-          if (btn.dataset.choice === correctChoice) {
-            btn.classList.add('correct');
-            feedback.innerHTML = `<strong>Correct.</strong> ${quizExplain[qId]}`;
-          } else {
-            btn.classList.add('wrong');
-            if (correctBtn) correctBtn.classList.add('correct');
-            feedback.innerHTML = `<strong>Not yet.</strong> ${quizExplain[qId]}`;
-          }
-        });
-      });
-    });
-  }
-
-  if (
-    traceCodeEl &&
-    traceInputRowEl &&
-    traceStateEl &&
-    traceStatusEl &&
-    traceMetricsEl &&
-    traceCoachEl &&
-    traceModeSetBtn &&
-    traceModeBruteBtn &&
-    tracePrevBtn &&
-    traceNextBtn &&
-    tracePlayBtn &&
-    traceResetBtn &&
-    datasetBtns.length
-  ) {
-    traceModeSetBtn.addEventListener('click', () => setTraceMode('set'));
-    traceModeBruteBtn.addEventListener('click', () => setTraceMode('brute'));
-    tracePrevBtn.addEventListener('click', prevTraceStep);
-    traceNextBtn.addEventListener('click', nextTraceStep);
-
-    datasetBtns.forEach(btn => {
-      btn.addEventListener('click', () => setTraceDataset(btn.dataset.dataset));
-    });
-
-    tracePlayBtn.addEventListener('click', () => {
-      if (traceTimer) {
-        stopTraceAuto();
-        return;
-      }
-
-      const total = tracePrograms[traceMode].steps.length;
-      if (traceStepIndex >= total - 1) {
-        traceStepIndex = -1;
-        renderTraceStep();
-      }
-
-      tracePlayBtn.textContent = 'Pause';
-      traceTimer = setInterval(() => {
-        if (traceStepIndex >= tracePrograms[traceMode].steps.length - 1) {
-          stopTraceAuto();
-        } else {
-          nextTraceStep();
-        }
-      }, 1000);
-    });
-
-    traceResetBtn.addEventListener('click', () => {
-      stopTraceAuto();
-      traceStepIndex = -1;
-      renderTraceStep();
-    });
-
-    setTraceMode('set');
-    setTraceDataset('case1');
-  }
-
-  if (quizItems.length) {
-    bindQuiz();
-  }
+  loadCase('a');
 </script>
 </body>
 </html>
