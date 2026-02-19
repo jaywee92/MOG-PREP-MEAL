@@ -3,109 +3,831 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MOG PREP MEAL - Arrays</title>
+<title>MOG PREP MEAL - Arrays - Duplicate Values</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0d111a;
     --surface: #171c29;
-    --border: #2d354c;
-    --text: #e7ebf5;
-    --text-muted: #94a0bb;
-    --accent: #22d3ee;
-    --accent-dim: rgba(34, 211, 238, 0.14);
+    --surface-strong: #20283a;
+    --border: #2f3952;
+    --text: #e8ecf6;
+    --muted: #96a3c0;
+    --cyan: #22d3ee;
+    --cyan-dim: rgba(34, 211, 238, 0.14);
+    --blue: #5b9cf5;
+    --blue-dim: rgba(91, 156, 245, 0.14);
+    --green: #4ade80;
+    --green-dim: rgba(74, 222, 128, 0.14);
+    --yellow: #f5c542;
+    --yellow-dim: rgba(245, 197, 66, 0.14);
+    --red: #f87171;
+    --red-dim: rgba(248, 113, 113, 0.14);
+    --violet: #a78bfa;
+    --violet-dim: rgba(167, 139, 250, 0.14);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
-    min-height: 100vh;
-    background: radial-gradient(circle at 10% 20%, rgba(34, 211, 238, 0.08), transparent 40%), radial-gradient(circle at 80% 10%, rgba(91, 156, 245, 0.08), transparent 35%), var(--bg);
-    color: var(--text);
     font-family: 'DM Sans', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px;
+    background:
+      radial-gradient(circle at 8% 12%, rgba(34, 211, 238, 0.12), transparent 36%),
+      radial-gradient(circle at 90% 2%, rgba(91, 156, 245, 0.12), transparent 30%),
+      radial-gradient(circle at 72% 90%, rgba(74, 222, 128, 0.09), transparent 34%),
+      var(--bg);
+    color: var(--text);
+    min-height: 100vh;
   }
 
-  .panel {
-    width: min(760px, 100%);
-    background: rgba(23, 28, 41, 0.74);
+  .wrap {
+    width: min(1120px, 100%);
+    margin: 0 auto;
+    padding: 34px 20px 56px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .crumb {
+    text-decoration: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--cyan);
+  }
+
+  .crumb:hover { text-decoration: underline; }
+
+  .hero {
+    background: rgba(23, 28, 41, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 16px;
-    padding: 34px 28px;
     backdrop-filter: blur(10px);
-    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.35);
+    padding: 28px 24px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+    margin-bottom: 20px;
   }
 
   .eyebrow {
     display: inline-block;
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
-    color: var(--accent);
-    background: var(--accent-dim);
+    color: var(--cyan);
+    background: var(--cyan-dim);
     border-radius: 6px;
-    padding: 3px 8px;
-    margin-bottom: 14px;
-    letter-spacing: 0.3px;
+    padding: 3px 9px;
+    margin-bottom: 12px;
+    letter-spacing: 0.2px;
   }
 
   h1 {
-    font-size: 34px;
-    letter-spacing: -0.4px;
+    font-size: clamp(26px, 4vw, 42px);
+    letter-spacing: -0.5px;
     margin-bottom: 10px;
   }
 
-  p {
-    color: var(--text-muted);
+  .lead {
+    color: var(--muted);
     line-height: 1.7;
-    margin-bottom: 16px;
+    max-width: 880px;
   }
 
-  .list {
-    margin: 8px 0 24px;
-    padding-left: 18px;
-    color: var(--text-muted);
+  .hero-grid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
   }
 
-  .list li {
-    margin: 8px 0;
+  .pill {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(13, 17, 26, 0.52);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
   }
 
-  a {
-    display: inline-flex;
-    align-items: center;
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .card {
+    background: rgba(23, 28, 41, 0.74);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 22px;
+  }
+
+  .section-title {
+    font-size: 22px;
+    letter-spacing: -0.3px;
+    margin-bottom: 8px;
+  }
+
+  .sub {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+
+  .problem {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 14px;
+  }
+
+  .box {
+    background: rgba(13, 17, 26, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .k {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .box p {
+    color: var(--muted);
+    line-height: 1.6;
+    font-size: 14px;
+  }
+
+  .examples {
+    display: grid;
     gap: 8px;
-    text-decoration: none;
-    color: var(--accent);
+  }
+
+  .ex {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: #d5dbee;
+    background: rgba(13, 17, 26, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .algo {
+    background: rgba(13, 17, 26, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px;
+  }
+
+  .algo h3 {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .algo h3 span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    margin-left: 8px;
+    padding: 2px 7px;
+    border-radius: 999px;
+    vertical-align: middle;
+  }
+
+  .tag-bad {
+    background: var(--red-dim);
+    color: var(--red);
+  }
+
+  .tag-good {
+    background: var(--green-dim);
+    color: var(--green);
+  }
+
+  .bars {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .stack-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .stack {
+    display: grid;
+    gap: 6px;
+  }
+
+  .bar {
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .bar.on {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+  }
+
+  .bar-a { background: linear-gradient(135deg, #f472b6, #ec4899); }
+  .bar-b { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+  .bar-c { background: linear-gradient(135deg, #34d399, #10b981); }
+  .bar-d { background: linear-gradient(135deg, #818cf8, #6366f1); }
+  .bar-e { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+
+  .arrow {
+    width: 44px;
+    height: 4px;
+    background: var(--yellow);
+    border-radius: 4px;
+    position: relative;
+  }
+
+  .arrow::after {
+    content: '';
+    position: absolute;
+    right: -6px;
+    top: -4px;
+    border: 6px solid transparent;
+    border-left: 8px solid var(--yellow);
+  }
+
+  .muted {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+
+  .sim {
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 14px;
+  }
+
+  .input-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+  }
+
+  .chip {
+    min-width: 44px;
+    height: 36px;
+    border-radius: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    background: rgba(13, 17, 26, 0.62);
+    color: #dbe2f3;
+    transition: all 0.2s;
+  }
+
+  .chip.active {
+    background: var(--cyan-dim);
+    color: var(--cyan);
+    border-color: rgba(34, 211, 238, 0.65);
+    transform: translateY(-1px);
+  }
+
+  .chip.dup {
+    background: var(--red-dim);
+    color: var(--red);
+    border-color: rgba(248, 113, 113, 0.65);
+  }
+
+  .panel {
+    background: rgba(13, 17, 26, 0.58);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: #d9e0f2;
+  }
+
+  .status {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 46px;
+  }
+
+  .actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  button {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(13, 17, 26, 0.62);
+    color: #d9e0f2;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    transition: all 0.2s;
+  }
+
+  button:hover {
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+  }
+
+  .set-view {
+    min-height: 122px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-content: flex-start;
+  }
+
+  .set-item {
+    background: var(--violet-dim);
+    color: var(--violet);
+    border: 1px solid rgba(167, 139, 250, 0.55);
+    border-radius: 999px;
+    padding: 6px 10px;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
   }
 
-  a:hover {
-    text-decoration: underline;
+  .cmp {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+    overflow: hidden;
+    border-radius: 10px;
   }
 
-  @media (max-width: 640px) {
-    h1 { font-size: 28px; }
-    .panel { padding: 26px 20px; }
+  .cmp th,
+  .cmp td {
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .cmp th {
+    background: rgba(13, 17, 26, 0.66);
+    font-family: 'JetBrains Mono', monospace;
+    color: #dbe2f3;
+  }
+
+  .cmp td {
+    color: var(--muted);
+    background: rgba(13, 17, 26, 0.45);
+  }
+
+  pre {
+    background: rgba(10, 13, 20, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 14px;
+    overflow: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #dde4f4;
+  }
+
+  .code-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .notes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .note {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(13, 17, 26, 0.5);
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .note h4 {
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    margin-bottom: 6px;
+    color: #dbe2f3;
+  }
+
+  .note p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  @media (max-width: 920px) {
+    .problem,
+    .split,
+    .sim,
+    .code-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .bars {
+      grid-template-columns: 1fr;
+    }
+
+    .arrow {
+      width: 4px;
+      height: 26px;
+      margin: 0 auto;
+    }
+
+    .arrow::after {
+      right: -4px;
+      top: 24px;
+      border: 6px solid transparent;
+      border-top: 8px solid var(--yellow);
+      border-left: 6px solid transparent;
+    }
   }
 </style>
 </head>
 <body>
-  <main class="panel">
-    <span class="eyebrow">MOG PREP MEAL · CATEGORY</span>
-    <h1>Arrays</h1>
-    <p>Build strong fundamentals for contiguous memory traversal, indexing logic, and prefix-based reasoning.</p>
-    <p>This page is intentionally kept as a clean placeholder. We can now expand it with problem patterns, example LeetCode questions, and implementation walkthroughs.</p>
-    <ul class="list">
-      <li>Core problem patterns</li>
-      <li>Representative LeetCode problems</li>
-      <li>Complexity analysis (time and space)</li>
-      <li>Common pitfalls and interview tips</li>
-    </ul>
-    <a href="../index.html">← Back to roadmap</a>
-  </main>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="crumb" href="../index.html">&larr; Back to roadmap</a>
+      <a class="crumb" href="https://leetcode.com/problems/contains-duplicate/" target="_blank" rel="noopener noreferrer">Open LeetCode #217</a>
+    </div>
+
+    <header class="hero">
+      <span class="eyebrow">ARRAYS · TASK 01</span>
+      <h1>Duplicate Values (Contains Duplicate)</h1>
+      <p class="lead">This is the first Arrays problem in your roadmap. The explanation below mirrors the visual flow from your video: first the nested-loop thinking, then the optimized set-based approach.</p>
+      <div class="hero-grid">
+        <div class="pill">Goal: return <code>true</code> if any number appears at least twice.</div>
+        <div class="pill">Input: integer array <code>nums</code></div>
+        <div class="pill">LeetCode: <code>217. Contains Duplicate</code></div>
+      </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2 class="section-title">Problem Snapshot</h2>
+        <p class="sub">Given an integer array <code>nums</code>, return <code>true</code> if any value appears at least twice, and <code>false</code> if every element is distinct.</p>
+        <div class="problem">
+          <div class="box">
+            <div class="k">DESCRIPTION</div>
+            <p>We only need to know if a duplicate exists. As soon as we detect one repeated value, we can stop and return immediately.</p>
+          </div>
+          <div class="examples">
+            <div class="ex">Input: [1,2,3,1]\nOutput: true</div>
+            <div class="ex">Input: [1,2,3,4]\nOutput: false</div>
+            <div class="ex">Input: [1,1,1,3,3,4,3,2,4,2]\nOutput: true</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">Visual Idea (Like in the Video)</h2>
+        <p class="sub">The first idea compares elements with nested loops. This works, but repeats many comparisons.</p>
+        <div class="split">
+          <article class="algo">
+            <h3>Approach A: Nested Loops <span class="tag-bad">O(n^2)</span></h3>
+            <div class="bars" id="loopBoard">
+              <div>
+                <div class="stack-title">OUTER LOOP</div>
+                <div class="stack">
+                  <div class="bar bar-a" data-col="left" data-pos="0">B</div>
+                  <div class="bar bar-b" data-col="left" data-pos="1">A</div>
+                  <div class="bar bar-c" data-col="left" data-pos="2">E</div>
+                  <div class="bar bar-d" data-col="left" data-pos="3">F</div>
+                  <div class="bar bar-e" data-col="left" data-pos="4">D</div>
+                </div>
+              </div>
+              <div class="arrow"></div>
+              <div>
+                <div class="stack-title">INNER LOOP</div>
+                <div class="stack">
+                  <div class="bar bar-b" data-col="right" data-pos="0">A</div>
+                  <div class="bar bar-a" data-col="right" data-pos="1">B</div>
+                  <div class="bar bar-c" data-col="right" data-pos="2">E</div>
+                  <div class="bar bar-a" data-col="right" data-pos="3">B</div>
+                  <div class="bar bar-e" data-col="right" data-pos="4">C</div>
+                </div>
+              </div>
+            </div>
+            <p class="muted">This matches your slide logic: outer pointer fixes one value, inner pointer scans remaining values to check equality.</p>
+          </article>
+
+          <article class="algo">
+            <h3>Approach B: Hash Set <span class="tag-good">O(n)</span></h3>
+            <p class="muted">Use a set named <code>seen</code>. Iterate once:</p>
+            <p class="muted">1) If current number is already in <code>seen</code> -> duplicate found -> return <code>true</code></p>
+            <p class="muted">2) Otherwise add number to <code>seen</code></p>
+            <p class="muted">3) If loop ends, return <code>false</code></p>
+            <p class="muted">Set lookup/insert is average O(1), so total runtime is O(n).</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">Step-by-Step Simulation (Set Approach)</h2>
+        <p class="sub">Input used in the animation: <code>[1, 2, 3, 1]</code>. Click through exactly like the presentation flow.</p>
+        <div class="sim">
+          <div class="panel">
+            <div class="k">INPUT ARRAY</div>
+            <div class="input-row" id="inputRow"></div>
+            <div class="row"><span>Current index</span><strong id="idx">-</strong></div>
+            <div class="row"><span>Current value</span><strong id="val">-</strong></div>
+            <div class="row"><span>Already in seen?</span><strong id="inSeen">-</strong></div>
+            <div class="status" id="statusText">Press <strong>Next</strong> to start the walkthrough.</div>
+            <div class="actions">
+              <button id="prevBtn" type="button">Prev</button>
+              <button id="nextBtn" type="button">Next</button>
+              <button id="playBtn" type="button">Auto Play</button>
+              <button id="resetBtn" type="button">Reset</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="k">SEEN SET</div>
+            <div class="set-view" id="setView"></div>
+            <p class="muted" style="margin-top:10px;">
+              Note from the video: <code>set()</code> creates an empty set. <code>{}</code> creates an empty dictionary in Python.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">Complexity Comparison</h2>
+        <table class="cmp">
+          <thead>
+            <tr>
+              <th>Approach</th>
+              <th>Time</th>
+              <th>Space</th>
+              <th>When to use</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Nested loops</td>
+              <td>O(n^2)</td>
+              <td>O(1)</td>
+              <td>Only as baseline or for learning pointer comparisons</td>
+            </tr>
+            <tr>
+              <td>Set (hash table)</td>
+              <td>O(n)</td>
+              <td>O(n)</td>
+              <td>Best practical choice for this problem</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">Reference Implementations (Python)</h2>
+        <div class="code-grid">
+          <div>
+            <p class="sub" style="margin-bottom:8px;">Baseline (nested loops)</p>
+<pre><code>def contains_duplicate_bruteforce(nums):
+    n = len(nums)
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums[i] == nums[j]:
+                return True
+    return False</code></pre>
+          </div>
+          <div>
+            <p class="sub" style="margin-bottom:8px;">Optimal (set)</p>
+<pre><code>def contains_duplicate(nums):
+    seen = set()
+    for value in nums:
+        if value in seen:
+            return True
+        seen.add(value)
+    return False
+
+# Equivalent one-liner:
+# return len(set(nums)) != len(nums)</code></pre>
+          </div>
+        </div>
+
+        <div class="notes">
+          <div class="note">
+            <h4>SET PROPERTY: UNIQUE</h4>
+            <p>Duplicates are not stored twice. This is exactly why duplicate detection is natural with a set.</p>
+          </div>
+          <div class="note">
+            <h4>SET PROPERTY: UNORDERED</h4>
+            <p>Order is not guaranteed. We only care about membership, not position.</p>
+          </div>
+          <div class="note">
+            <h4>SET INTERNALLY</h4>
+            <p>Python sets are hash-table based. Average lookup/insert/delete is O(1).</p>
+          </div>
+          <div class="note">
+            <h4>INTERVIEW TIP</h4>
+            <p>State the brute-force complexity first, then justify the set optimization clearly.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script>
+  const steps = [
+    { idx: 0, value: 1, inSeen: false, setAfter: [1], done: false, msg: '1 is new. Add it to seen.' },
+    { idx: 1, value: 2, inSeen: false, setAfter: [1, 2], done: false, msg: '2 is new. Add it to seen.' },
+    { idx: 2, value: 3, inSeen: false, setAfter: [1, 2, 3], done: false, msg: '3 is new. Add it to seen.' },
+    { idx: 3, value: 1, inSeen: true, setAfter: [1, 2, 3], done: true, msg: '1 is already in seen. Duplicate found -> return true.' }
+  ];
+
+  const input = [1, 2, 3, 1];
+  const rowEl = document.getElementById('inputRow');
+  const idxEl = document.getElementById('idx');
+  const valEl = document.getElementById('val');
+  const inSeenEl = document.getElementById('inSeen');
+  const statusText = document.getElementById('statusText');
+  const setView = document.getElementById('setView');
+
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const playBtn = document.getElementById('playBtn');
+  const resetBtn = document.getElementById('resetBtn');
+
+  let stepIndex = -1;
+  let timer = null;
+
+  function renderInput(activeIdx, duplicateIdx) {
+    rowEl.innerHTML = '';
+    input.forEach((num, index) => {
+      const chip = document.createElement('div');
+      chip.className = 'chip';
+      if (index === activeIdx) chip.classList.add('active');
+      if (duplicateIdx !== null && index === duplicateIdx) chip.classList.add('dup');
+      chip.textContent = num;
+      rowEl.appendChild(chip);
+    });
+  }
+
+  function renderSet(values) {
+    setView.innerHTML = '';
+    if (!values.length) {
+      const muted = document.createElement('div');
+      muted.className = 'muted';
+      muted.textContent = '(empty set)';
+      setView.appendChild(muted);
+      return;
+    }
+    values.forEach(v => {
+      const item = document.createElement('span');
+      item.className = 'set-item';
+      item.textContent = v;
+      setView.appendChild(item);
+    });
+  }
+
+  function renderStep() {
+    if (stepIndex < 0) {
+      idxEl.textContent = '-';
+      valEl.textContent = '-';
+      inSeenEl.textContent = '-';
+      statusText.innerHTML = 'Press <strong>Next</strong> to start the walkthrough.';
+      renderInput(null, null);
+      renderSet([]);
+      return;
+    }
+
+    const s = steps[stepIndex];
+    idxEl.textContent = s.idx;
+    valEl.textContent = s.value;
+    inSeenEl.textContent = s.inSeen ? 'Yes' : 'No';
+    statusText.textContent = s.msg;
+    renderInput(s.idx, s.done ? s.idx : null);
+    renderSet(s.setAfter);
+
+    if (s.done) {
+      stopAuto();
+      statusText.innerHTML = '<strong>Duplicate detected.</strong> ' + s.msg;
+    }
+  }
+
+  function nextStep() {
+    if (stepIndex < steps.length - 1) {
+      stepIndex += 1;
+      renderStep();
+    } else {
+      stopAuto();
+    }
+  }
+
+  function prevStep() {
+    if (stepIndex > -1) {
+      stepIndex -= 1;
+      renderStep();
+    }
+  }
+
+  function stopAuto() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+      playBtn.textContent = 'Auto Play';
+    }
+  }
+
+  prevBtn.addEventListener('click', prevStep);
+  nextBtn.addEventListener('click', nextStep);
+
+  playBtn.addEventListener('click', () => {
+    if (timer) {
+      stopAuto();
+      return;
+    }
+
+    if (stepIndex >= steps.length - 1) {
+      stepIndex = -1;
+      renderStep();
+    }
+
+    playBtn.textContent = 'Pause';
+    timer = setInterval(() => {
+      if (stepIndex >= steps.length - 1) {
+        stopAuto();
+      } else {
+        nextStep();
+      }
+    }, 1100);
+  });
+
+  resetBtn.addEventListener('click', () => {
+    stopAuto();
+    stepIndex = -1;
+    renderStep();
+  });
+
+  let leftPos = 0;
+  let rightPos = 0;
+  const leftBars = Array.from(document.querySelectorAll('[data-col="left"]'));
+  const rightBars = Array.from(document.querySelectorAll('[data-col="right"]'));
+
+  function animateLoopBoard() {
+    leftBars.forEach((el, idx) => el.classList.toggle('on', idx === leftPos));
+    rightBars.forEach((el, idx) => el.classList.toggle('on', idx === rightPos));
+    rightPos += 1;
+    if (rightPos >= rightBars.length) {
+      rightPos = 0;
+      leftPos = (leftPos + 1) % leftBars.length;
+    }
+  }
+
+  setInterval(animateLoopBoard, 700);
+  renderStep();
+</script>
 </body>
 </html>

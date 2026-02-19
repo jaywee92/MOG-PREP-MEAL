@@ -360,6 +360,38 @@
     gap: 18px;
   }
 
+  .intro-cards {
+    max-width: 860px;
+    grid-template-columns: 1fr;
+    padding-bottom: 26px;
+  }
+
+  .intro-card {
+    min-height: 204px;
+    border-color: rgba(251, 113, 133, 0.24);
+    box-shadow: 0 18px 54px rgba(0, 0, 0, 0.3), 0 0 32px rgba(251, 113, 133, 0.08);
+  }
+
+  .intro-card::before {
+    opacity: 1;
+    height: 3px;
+    box-shadow: 0 0 18px var(--accent);
+  }
+
+  .intro-card .card-desc {
+    max-width: 640px;
+    font-size: 13px;
+  }
+
+  .intro-next {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    margin: -4px 0 34px;
+    opacity: 0.9;
+  }
+
   .card {
     --accent: var(--blue);
     --accent-dim: var(--blue-dim);
@@ -609,20 +641,25 @@
     </div>
   </section>
 
-  <h2 class="section-title">Array Patterns</h2>
-  <p class="section-sub">Core sequence-based strategies for linear data.</p>
-  <div class="cards">
-    <a href="categories/big-o-notation.html" class="card c-big-o">
+  <h2 class="section-title">Start Here</h2>
+  <p class="section-sub">Before diving into categories, lock in complexity thinking.</p>
+  <div class="cards intro-cards">
+    <a href="categories/big-o-notation.html" class="card c-big-o intro-card">
       <div class="card-head">
         <div class="card-icon">📊</div>
         <div class="card-title">Big O Notation</div>
         <div class="card-arrow">→</div>
       </div>
       <div class="card-tag">FUNDAMENTAL</div>
-      <div class="card-desc">Understand time and space complexity to compare solutions, justify optimizations, and choose scalable approaches.</div>
+      <div class="card-desc">Understand time and space complexity to compare solutions, justify optimizations, and choose scalable approaches. This is the introduction layer for all following problem categories.</div>
       <div class="card-skills"><span>O(1)</span><span>O(n)</span><span>O(log n)</span><span>Space</span></div>
     </a>
+  </div>
+  <p class="intro-next">Then continue with <strong>Array Patterns</strong> ↓</p>
 
+  <h2 class="section-title">Array Patterns</h2>
+  <p class="section-sub">Core sequence-based strategies for linear data.</p>
+  <div class="cards">
     <a href="categories/arrays.html" class="card c-arrays">
       <div class="card-head">
         <div class="card-icon">🔢</div>
